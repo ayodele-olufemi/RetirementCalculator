@@ -193,9 +193,9 @@ E_desAnnualRetIncomeI.place(relx=0, rely=0.32, relwidth=1)
 E_desAnnualRetIncomeI_ttp = CreateToolTip(E_desAnnualRetIncomeI, "Enter your desired annual retimrement income after active years i.e. after age 80 years")
 
 
-L_averageAnnualReturnRate = tk.Entry(formEntryFrame, bg="white")
-L_averageAnnualReturnRate.place(relx=0, rely=0.35, relwidth=1)
-L_averageAnnualReturnRate_ttp = CreateToolTip(L_averageAnnualReturnRate, "Enter estimated average annual return rate")
+E_averageAnnualReturnRate = tk.Entry(formEntryFrame, bg="white")
+E_averageAnnualReturnRate.place(relx=0, rely=0.35, relwidth=1)
+E_averageAnnualReturnRate_ttp = CreateToolTip(E_averageAnnualReturnRate, "Enter estimated average annual return rate")
 
 
 B_calculateButton = tk.Button(form, text="Calculate", command=lambda: calculateRetirement())
@@ -233,7 +233,7 @@ def clearAll():
     E_currentRetSavings.insert('end', "100000")
     E_desAnnualRetIncomeA.insert('end', "45000")
     E_desAnnualRetIncomeI.insert('end', "20000")
-    L_averageAnnualReturnRate.insert('end', "4")
+    E_averageAnnualReturnRate.insert('end', "4")
     
 def calculateRetirement():
     try: 
@@ -245,11 +245,10 @@ def calculateRetirement():
         lifeExpectancy = E_lifeExpectancy.get()
         curAnnualSalary = float(E_currentAnnualSalary.get())
         curAnnualContPercent =  int(S_annualRetCont.get())
-        curAnnualCont = (curAnnualContPercent / 100.0) * curAnnualSalary
         curRetirmentSavings = float(E_currentRetSavings.get())
         darIncomeActive = float(E_desAnnualRetIncomeA.get())
         darIncomeInactive = float(E_desAnnualRetIncomeI.get())
-        avgAnnualReturnRate = float(L_averageAnnualReturnRate.get())
+        avgAnnualReturnRate = float(E_averageAnnualReturnRate.get())
         currentYear = datetime.datetime.now().year
         retirementTable = []
         tableRows = range(currentAge + 1, 101)
@@ -261,6 +260,7 @@ def calculateRetirement():
         firstRow.append("Annual Sal")
         firstRow.append("Annual Sav")
         firstRow.append("Growth")
+        firstRow.append("Withdrawal")
         firstRow.append("Nest Egg")
         
         secondRow = []
@@ -269,7 +269,8 @@ def calculateRetirement():
         secondRow.append(currentAge)
         secondRow.append(round(curAnnualSalary))
         secondRow.append(0)
-        secondRow.append(round(curRetirmentSavings * (avgAnnualReturnRate / 100.0)))
+        secondRow.append(0)
+        secondRow.append(0)
         secondRow.append(round(curRetirmentSavings))
         
         retirementTable.append(firstRow)
@@ -286,25 +287,21 @@ def calculateRetirement():
             
             if x < retireAge:
                 thisRow.append(round(curAnnualSalary))
-                thisRow.append(round(curAnnualCont))
-                thisRow.append(round(curRetirmentSavings))
+                thisRow.append(round(thisRow[2] * (curAnnualContPercent / 100.0)))
                 growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
                 thisRow.append(round(growth))
-                curRetirmentSavings = curRetirmentSavings + growth + curAnnualCont
-                thisRow.append(0) 
-                
+                thisRow.append(0)
+                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[5]
+                thisRow.append(round(curRetirmentSavings))
             else:
-                curAnnualSalary = 0
-                curAnnualCont = 0
-                thisRow.append(round(curAnnualSalary))
-                thisRow.append(round(curAnnualCont))
+                thisRow.append(0)
+                thisRow.append(0)
                 growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
                 thisRow.append(round(growth))
-                curRetirmentSavings = curRetirmentSavings - darIncomeActive + growth
-                thisRow.append(round(curRetirmentSavings))
                 thisRow.append(round(darIncomeActive))
-            
-            
+                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[5]
+                thisRow.append(round(curRetirmentSavings))
+                
             retirementTable.append(thisRow)
         
         
