@@ -6,7 +6,9 @@ Created on Tue Feb 11 19:43:13 2020
 """
 
 import tkinter as tk
+import tkinter.ttk as tkk
 import datetime
+import matplotlib.pyplot as plt
 
 
 class CreateToolTip(object):
@@ -47,6 +49,7 @@ HEIGHT = 1080
 WIDTH = 1920
 
 app = tk.Tk()
+app.title("IT680 - Retirement Calculator")
 canvas = tk.Canvas(app, height=HEIGHT, width=WIDTH, bg="#aecad0")
 canvas.pack()
 
@@ -60,7 +63,53 @@ appName.pack(expand=True)
 
 
 form = tk.Frame(canvas, bg="#263D42")
-form.place(relx=0.005, rely=0.105, relwidth=0.5, relheight=0.9)
+form.place(relx=0, rely=0.105, relwidth=0.5, relheight=0.9)
+
+tableFrame = tk.Frame(canvas, bg="#262122")
+tableFrame.place(relx=0.5, rely=0.105, relwidth=0.5, relheight=0.9)
+
+tablayout = tkk.Notebook(tableFrame)
+tab1 = tk.Frame(tablayout)
+tab1.pack(fill="both")
+
+for row in range(5):
+    for column in range(6):
+        if row==0:
+            label = tk.Entry(tab1, text="Heading : " + str(column))
+            label.config(font=('Arial',14))
+            label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+            tab1.grid_columnconfigure(column, weight=1)
+        else:
+            label=tk.Entry(tab1,text="Row : "+str(row)+" , Column : "+str(column))
+            label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
+            tab1.grid_columnconfigure(column,weight=1)
+
+tablayout.add(tab1,text="TAB 1")
+
+
+#tab2
+tab2=tk.Frame(tablayout)
+tab2.pack(fill="both")
+
+#adding table into tab
+
+for row in range(5):
+    for column in range(6):
+        if row==0:
+            label = tk.Label(tab2, text="Heading : " + str(column), bg="white", fg="black", padx=3,
+                          pady=3)
+            label.config(font=('Arial',14))
+            label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+            tab2.grid_columnconfigure(column, weight=1)
+        else:
+            label=tk.Label(tab2,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
+            label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
+            tab2.grid_columnconfigure(column,weight=1)
+
+tablayout.add(tab2,text="TAB 2")
+
+
+tablayout.pack(fill="both")
 
 
 formName = tk.Label(form, text="Retirement Form", font=("Helvetica 16 bold "), fg="yellow", bg="#263D42")  
@@ -302,13 +351,23 @@ def calculateRetirement():
                 curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[5]
                 thisRow.append(round(curRetirmentSavings))
                 
+            
             retirementTable.append(thisRow)
+            
+            if curRetirmentSavings < 0:
+                break
         
-        
+        finalAge = retirementTable[len(retirementTable)-1][1]
         #try output
         for y in retirementTable:
             print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]))
         
+        
+        #extract Nest Egg
+        nestEgg = []
+        for k in retirementTable:
+            nestEgg.append(k[6])
+        plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
         
         
         
