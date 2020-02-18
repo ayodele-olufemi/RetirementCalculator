@@ -167,6 +167,18 @@ L_averageAnnualReturnRate = tk.Label(formLabelsFrame, text="Average Annual Retur
 L_averageAnnualReturnRate.place(relx=0.005, rely=0.35)
 
 
+L_averageAnnualSalaryIncrease = tk.Label(formLabelsFrame, text="Average Annual Salary Increase(%): ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
+L_averageAnnualSalaryIncrease.place(relx=0.005, rely=0.38)
+
+
+L_averageAnnualContributionIncrease = tk.Label(formLabelsFrame, text="Average Annual Contribution Increase(%): ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
+L_averageAnnualContributionIncrease.place(relx=0.005, rely=0.41)
+
+
+L_desiredEstate = tk.Label(formLabelsFrame, text="Desired Estate Amount: ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
+L_desiredEstate.place(relx=0.005, rely=0.44)
+
+
 L_comparison = tk.Checkbutton(formLabelsFrame, text="Compare with two other plans?")
 L_comparison.place(relx=0.005, rely=0.38)
 
@@ -368,6 +380,7 @@ def calculateRetirement():
         for k in retirementTable:
             nestEgg.append(k[6])
         plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
+        plt.show()
         
         
         
