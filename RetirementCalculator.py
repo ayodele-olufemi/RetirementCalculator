@@ -43,7 +43,7 @@ class CreateToolTip(object):
 
 
 
-
+numOfConfigurations = 1
 
 HEIGHT = 1080
 WIDTH = 1920
@@ -68,48 +68,7 @@ form.place(relx=0, rely=0.105, relwidth=0.5, relheight=0.9)
 tableFrame = tk.Frame(canvas, bg="#262122")
 tableFrame.place(relx=0.5, rely=0.105, relwidth=0.5, relheight=0.9)
 
-tablayout = tkk.Notebook(tableFrame)
-tab1 = tk.Frame(tablayout)
-tab1.pack(fill="both")
 
-for row in range(5):
-    for column in range(6):
-        if row==0:
-            label = tk.Entry(tab1, text="Heading : " + str(column))
-            label.config(font=('Arial',14))
-            label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-            tab1.grid_columnconfigure(column, weight=1)
-        else:
-            label=tk.Entry(tab1,text="Row : "+str(row)+" , Column : "+str(column))
-            label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-            tab1.grid_columnconfigure(column,weight=1)
-
-tablayout.add(tab1,text="TAB 1")
-
-
-#tab2
-tab2=tk.Frame(tablayout)
-tab2.pack(fill="both")
-
-#adding table into tab
-
-for row in range(5):
-    for column in range(6):
-        if row==0:
-            label = tk.Label(tab2, text="Heading : " + str(column), bg="white", fg="black", padx=3,
-                          pady=3)
-            label.config(font=('Arial',14))
-            label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-            tab2.grid_columnconfigure(column, weight=1)
-        else:
-            label=tk.Label(tab2,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
-            label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-            tab2.grid_columnconfigure(column,weight=1)
-
-tablayout.add(tab2,text="TAB 2")
-
-
-tablayout.pack(fill="both")
 
 
 formName = tk.Label(form, text="Retirement Form", font=("Helvetica 16 bold "), fg="yellow", bg="#263D42")  
@@ -167,26 +126,16 @@ L_averageAnnualReturnRate = tk.Label(formLabelsFrame, text="Average Annual Retur
 L_averageAnnualReturnRate.place(relx=0.005, rely=0.35)
 
 
-L_averageAnnualSalaryIncrease = tk.Label(formLabelsFrame, text="Average Annual Salary Increase(%): ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
+L_averageAnnualSalaryIncrease = tk.Label(formLabelsFrame, text="Annual Salary Increase(%): ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
 L_averageAnnualSalaryIncrease.place(relx=0.005, rely=0.38)
 
 
-L_averageAnnualContributionIncrease = tk.Label(formLabelsFrame, text="Average Annual Contribution Increase(%): ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
+L_averageAnnualContributionIncrease = tk.Label(formLabelsFrame, text="Annual Contribution Increase(%): ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
 L_averageAnnualContributionIncrease.place(relx=0.005, rely=0.41)
 
 
 L_desiredEstate = tk.Label(formLabelsFrame, text="Desired Estate Amount: ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
 L_desiredEstate.place(relx=0.005, rely=0.44)
-
-
-L_comparison = tk.Checkbutton(formLabelsFrame, text="Compare with two other plans?")
-L_comparison.place(relx=0.005, rely=0.38)
-
-
-
-
-
-
 
 
 
@@ -259,11 +208,221 @@ E_averageAnnualReturnRate.place(relx=0, rely=0.35, relwidth=1)
 E_averageAnnualReturnRate_ttp = CreateToolTip(E_averageAnnualReturnRate, "Enter estimated average annual return rate")
 
 
+E_averageAnnualSalaryIncrease = tk.Entry(formEntryFrame, bg="white")
+E_averageAnnualSalaryIncrease.place(relx=0, rely=0.38, relwidth=1)
+E_averageAnnualSalaryIncrease_ttp = CreateToolTip(E_averageAnnualSalaryIncrease, "Enter estimated average annual salary increase")
+
+
+E_averageAnnualContributionIncrease = tk.Entry(formEntryFrame, bg="white")
+E_averageAnnualContributionIncrease.place(relx=0, rely=0.41, relwidth=1)
+E_averageAnnualContributionIncrease_ttp = CreateToolTip(E_averageAnnualContributionIncrease, "Enter estimated average annual contribution increase")
+
+
+E_desiredEstate = tk.Entry(formEntryFrame, bg="white")
+E_desiredEstate.place(relx=0, rely=0.44, relwidth=1)
+E_desiredEstate_ttp = CreateToolTip(E_desiredEstate, "If desired, enter estimated amount you'd like to leave to your heirs")
+
+
+E_comparison = tk.Button(formEntryFrame, text="Add Another Configuration?", command=lambda: compareControl())
+E_comparison.place(relx=0, rely=0.47, relwidth=1)
+
+
+def compareControl():
+    global numOfConfigurations
+    numOfConfigurations = 2
+    E_fName2.place(relx=0, rely=0, relwidth=1)
+    E_lName2.place(relx=0, rely=0.03, relwidth=1)
+    E_Email2.place(relx=0, rely=0.06, relwidth=1)
+    
+    E_fName2.insert('end', E_fName.get())
+    E_lName2.insert('end', E_lName.get())
+    E_Email2.insert('end', E_Email.get())
+    
+    E_currentAge2.place(relx=0, rely=0.09, relwidth=1)
+    E_retireAge2.place(relx=0, rely=0.12, relwidth=1)
+    E_lifeExpectancy2.place(relx=0, rely=0.15, relwidth=1)
+    E_currentAnnualSalary2.place(relx=0, rely=0.18, relwidth=1)
+    S_annualRetCont2.place(relx=0, rely=0.21, relwidth=1)
+    E_currentRetSavings2.place(relx=0, rely=0.26, relwidth=1)
+    E_desAnnualRetIncomeA2.place(relx=0, rely=0.29, relwidth=1)
+    E_desAnnualRetIncomeI2.place(relx=0, rely=0.32, relwidth=1)
+    E_averageAnnualReturnRate2.place(relx=0, rely=0.35, relwidth=1)
+    E_averageAnnualSalaryIncrease2.place(relx=0, rely=0.38, relwidth=1)
+    E_averageAnnualContributionIncrease2.place(relx=0, rely=0.41, relwidth=1)
+    E_desiredEstate2.place(relx=0, rely=0.44, relwidth=1)
+    E_comparison2.place(relx=0, rely=0.47, relwidth=1)
+    E_comparison.place_forget()
+
+
+
+#form2 entry frame
+formEntryFrame2 = tk.Frame(form, bg="#263D42")
+formEntryFrame2.place(relx=0.5, rely=0.03, relwidth=0.2, relheight=1)
+
+#entries in formEntry
+E_fName2 = tk.Entry(formEntryFrame2, bg="white")
+E_fName2_ttp = CreateToolTip(E_fName2, "Enter first name")
+
+
+E_lName2 = tk.Entry(formEntryFrame2, bg="white")
+E_lName2_ttp = CreateToolTip(E_lName2, "Enter last name")
+
+
+E_Email2 = tk.Entry(formEntryFrame2, bg="white")
+E_Email2_ttp = CreateToolTip(E_Email2, "Enter your email address")
+
+
+E_currentAge2 = tk.Entry(formEntryFrame2, bg="white")
+E_currentAge2_ttp = CreateToolTip(E_currentAge2, "Enter age at the end of current year")
+
+
+E_retireAge2 = tk.Entry(formEntryFrame2, bg="white")
+E_retireAge2_ttp = CreateToolTip(E_retireAge2, "Enter age you plan to retire at")
+
+
+E_lifeExpectancy2 = tk.Entry(formEntryFrame2, bg="white")
+E_lifeExpectancy2_ttp = CreateToolTip(E_lifeExpectancy2, "Enter age you expect to live to")
+
+
+E_currentAnnualSalary2 = tk.Entry(formEntryFrame2, bg="white")
+E_currentAnnualSalary2_ttp = CreateToolTip(E_currentAnnualSalary2, "Enter your current annual salary")
+
+
+S_annualRetCont2 = tk.Scale(formEntryFrame2, from_=0, to=100, orient='horizontal')
+S_annualRetCont2_ttp = CreateToolTip(S_annualRetCont2, "Slide as percentage of annual salary")
+
+
+E_currentRetSavings2 = tk.Entry(formEntryFrame2, bg="white")
+E_currentRetSavings2_ttp = CreateToolTip(E_currentRetSavings2, "Enter your current total savings towards retirement")
+
+
+E_desAnnualRetIncomeA2 = tk.Entry(formEntryFrame2, bg="white")
+E_desAnnualRetIncomeA2_ttp = CreateToolTip(E_desAnnualRetIncomeA2, "Enter your desired annual retimrement income during active years i.e. till age 80 years")
+
+
+E_desAnnualRetIncomeI2 = tk.Entry(formEntryFrame2, bg="white")
+E_desAnnualRetIncomeI2_ttp = CreateToolTip(E_desAnnualRetIncomeI2, "Enter your desired annual retimrement income after active years i.e. after age 80 years")
+
+
+E_averageAnnualReturnRate2 = tk.Entry(formEntryFrame2, bg="white")
+E_averageAnnualReturnRate2_ttp = CreateToolTip(E_averageAnnualReturnRate2, "Enter estimated average annual return rate")
+
+
+E_averageAnnualSalaryIncrease2 = tk.Entry(formEntryFrame2, bg="white")
+E_averageAnnualSalaryIncrease2_ttp = CreateToolTip(E_averageAnnualSalaryIncrease2, "Enter estimated average annual salary increase")
+
+
+E_averageAnnualContributionIncrease2 = tk.Entry(formEntryFrame2, bg="white")
+E_averageAnnualContributionIncrease2_ttp = CreateToolTip(E_averageAnnualContributionIncrease2, "Enter estimated average annual contribution increase")
+
+
+E_desiredEstate2 = tk.Entry(formEntryFrame2, bg="white")
+E_desiredEstate2_ttp = CreateToolTip(E_desiredEstate2, "If desired, enter estimated amount you'd like to leave to your heirs")
+
+E_comparison2 = tk.Button(formEntryFrame2, text="Add Another Configuration?", command=lambda: compareControl2())
+
+
+def compareControl2():
+    global numOfConfigurations
+    numOfConfigurations = 3
+    E_fName3.place(relx=0, rely=0, relwidth=1)
+    E_lName3.place(relx=0, rely=0.03, relwidth=1)
+    E_Email3.place(relx=0, rely=0.06, relwidth=1)
+    
+    E_fName3.insert('end', E_fName.get())
+    E_lName3.insert('end', E_lName.get())
+    E_Email3.insert('end', E_Email.get())
+    
+    E_currentAge3.place(relx=0, rely=0.09, relwidth=1)
+    E_retireAge3.place(relx=0, rely=0.12, relwidth=1)
+    E_lifeExpectancy3.place(relx=0, rely=0.15, relwidth=1)
+    E_currentAnnualSalary3.place(relx=0, rely=0.18, relwidth=1)
+    S_annualRetCont3.place(relx=0, rely=0.21, relwidth=1)
+    E_currentRetSavings3.place(relx=0, rely=0.26, relwidth=1)
+    E_desAnnualRetIncomeA3.place(relx=0, rely=0.29, relwidth=1)
+    E_desAnnualRetIncomeI3.place(relx=0, rely=0.32, relwidth=1)
+    E_averageAnnualReturnRate3.place(relx=0, rely=0.35, relwidth=1)
+    E_averageAnnualSalaryIncrease3.place(relx=0, rely=0.38, relwidth=1)
+    E_averageAnnualContributionIncrease3.place(relx=0, rely=0.41, relwidth=1)
+    E_desiredEstate3.place(relx=0, rely=0.44, relwidth=1)
+    E_comparison2.place_forget()
+
+
+
+
+
+#form3 entry frame
+formEntryFrame3 = tk.Frame(form, bg="#263D42")
+formEntryFrame3.place(relx=0.735, rely=0.03, relwidth=0.2, relheight=1)
+
+#entries in formEntry
+E_fName3 = tk.Entry(formEntryFrame3, bg="white")
+E_fName3_ttp = CreateToolTip(E_fName3, "Enter first name")
+
+
+E_lName3 = tk.Entry(formEntryFrame3, bg="white")
+E_lName3_ttp = CreateToolTip(E_lName3, "Enter last name")
+
+
+E_Email3 = tk.Entry(formEntryFrame3, bg="white")
+E_Email3_ttp = CreateToolTip(E_Email3, "Enter your email address")
+
+
+E_currentAge3 = tk.Entry(formEntryFrame3, bg="white")
+E_currentAge3_ttp = CreateToolTip(E_currentAge3, "Enter age at the end of current year")
+
+
+E_retireAge3 = tk.Entry(formEntryFrame3, bg="white")
+E_retireAge3_ttp = CreateToolTip(E_retireAge3, "Enter age you plan to retire at")
+
+
+E_lifeExpectancy3 = tk.Entry(formEntryFrame3, bg="white")
+E_lifeExpectancy3_ttp = CreateToolTip(E_lifeExpectancy3, "Enter age you expect to live to")
+
+
+E_currentAnnualSalary3 = tk.Entry(formEntryFrame3, bg="white")
+E_currentAnnualSalary3_ttp = CreateToolTip(E_currentAnnualSalary3, "Enter your current annual salary")
+
+
+S_annualRetCont3 = tk.Scale(formEntryFrame3, from_=0, to=100, orient='horizontal')
+S_annualRetCont3_ttp = CreateToolTip(S_annualRetCont3, "Slide as percentage of annual salary")
+
+
+E_currentRetSavings3 = tk.Entry(formEntryFrame3, bg="white")
+E_currentRetSavings3_ttp = CreateToolTip(E_currentRetSavings3, "Enter your current total savings towards retirement")
+
+
+E_desAnnualRetIncomeA3 = tk.Entry(formEntryFrame3, bg="white")
+E_desAnnualRetIncomeA3_ttp = CreateToolTip(E_desAnnualRetIncomeA3, "Enter your desired annual retimrement income during active years i.e. till age 80 years")
+
+
+E_desAnnualRetIncomeI3 = tk.Entry(formEntryFrame3, bg="white")
+E_desAnnualRetIncomeI3_ttp = CreateToolTip(E_desAnnualRetIncomeI3, "Enter your desired annual retimrement income after active years i.e. after age 80 years")
+
+
+E_averageAnnualReturnRate3 = tk.Entry(formEntryFrame3, bg="white")
+E_averageAnnualReturnRate3_ttp = CreateToolTip(E_averageAnnualReturnRate3, "Enter estimated average annual return rate")
+
+
+E_averageAnnualSalaryIncrease3 = tk.Entry(formEntryFrame3, bg="white")
+E_averageAnnualSalaryIncrease3_ttp = CreateToolTip(E_averageAnnualSalaryIncrease3, "Enter estimated average annual salary increase")
+
+
+E_averageAnnualContributionIncrease3 = tk.Entry(formEntryFrame3, bg="white")
+E_averageAnnualContributionIncrease3_ttp = CreateToolTip(E_averageAnnualContributionIncrease3, "Enter estimated average annual contribution increase")
+
+
+E_desiredEstate3 = tk.Entry(formEntryFrame3, bg="white")
+E_desiredEstate3_ttp = CreateToolTip(E_desiredEstate3, "If desired, enter estimated amount you'd like to leave to your heirs")
+
+
+
+
 B_calculateButton = tk.Button(form, text="Calculate", command=lambda: calculateRetirement())
-B_calculateButton.place(relx=0.11, rely=0.46, relwidth=0.1)
+B_calculateButton.place(relx=0.11, rely=0.55, relwidth=0.1)
 
 B_resetButton = tk.Button(form, text="Reset", command=lambda: clearAll())
-B_resetButton.place(relx=0.26, rely=0.46, relwidth=0.1)
+B_resetButton.place(relx=0.26, rely=0.55, relwidth=0.1)
 
 
 
@@ -295,6 +454,9 @@ def clearAll():
     E_desAnnualRetIncomeA.insert('end', "45000")
     E_desAnnualRetIncomeI.insert('end', "20000")
     E_averageAnnualReturnRate.insert('end', "4")
+    E_averageAnnualSalaryIncrease.insert('end', "2")
+    E_averageAnnualContributionIncrease.insert('end', "2")
+    E_desiredEstate.insert('end', "100000")
     
 def calculateRetirement():
     try: 
@@ -310,10 +472,13 @@ def calculateRetirement():
         darIncomeActive = float(E_desAnnualRetIncomeA.get())
         darIncomeInactive = float(E_desAnnualRetIncomeI.get())
         avgAnnualReturnRate = float(E_averageAnnualReturnRate.get())
+        avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
+        avgAnnualContIncrease = float(E_averageAnnualContributionIncrease.get())
+        desiredEstate = float(E_desiredEstate.get())
         currentYear = datetime.datetime.now().year
         retirementTable = []
         tableRows = range(currentAge + 1, 101)
-        numberOfRows = len(tableRows)
+        
         
         firstRow = []
         firstRow.append("Year")
@@ -347,6 +512,7 @@ def calculateRetirement():
             thisRow.append(x)
             
             if x < retireAge:
+                curAnnualSalary = curAnnualSalary + (curAnnualSalary * (avgAnnualSalaryIncrease / 100.0))
                 thisRow.append(round(curAnnualSalary))
                 thisRow.append(round(thisRow[2] * (curAnnualContPercent / 100.0)))
                 growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
@@ -380,8 +546,48 @@ def calculateRetirement():
         for k in retirementTable:
             nestEgg.append(k[6])
         plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
-        plt.show()
+        tablayout = tkk.Notebook(tableFrame)
+        tab1 = tk.Frame(tablayout)
+        tab1.pack(fill="both")
         
+        for row in range(5):
+            for column in range(6):
+                if row==0:
+                    label = tk.Entry(tab1, text="Heading : " + str(column))
+                    label.config(font=('Arial',14))
+                    label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+                    tab1.grid_columnconfigure(column, weight=1)
+                else:
+                    label=tk.Entry(tab1,text="Row : "+str(row)+" , Column : "+str(column))
+                    label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
+                    tab1.grid_columnconfigure(column,weight=1)
+        
+        tablayout.add(tab1,text="TAB 1")
+        
+        
+        #tab2
+        tab2=tk.Frame(tablayout)
+        tab2.pack(fill="both")
+        
+        #adding table into tab
+        
+        for row in range(5):
+            for column in range(6):
+                if row==0:
+                    label = tk.Label(tab2, text="Heading : " + str(column), bg="white", fg="black", padx=3,
+                                  pady=3)
+                    label.config(font=('Arial',14))
+                    label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+                    tab2.grid_columnconfigure(column, weight=1)
+                else:
+                    label=tk.Label(tab2,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
+                    label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
+                    tab2.grid_columnconfigure(column,weight=1)
+        
+        tablayout.add(tab2,text="TAB 2")
+        
+        #tablayout.pack(fill="both")
+        tablayout.place(relx=0, rely=0, relwidth=0.8)
         
         
     except: 
