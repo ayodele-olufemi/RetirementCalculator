@@ -130,12 +130,8 @@ L_averageAnnualSalaryIncrease = tk.Label(formLabelsFrame, text="Annual Salary In
 L_averageAnnualSalaryIncrease.place(relx=0.005, rely=0.38)
 
 
-L_averageAnnualContributionIncrease = tk.Label(formLabelsFrame, text="Annual Contribution Increase(%): ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
-L_averageAnnualContributionIncrease.place(relx=0.005, rely=0.41)
-
-
 L_desiredEstate = tk.Label(formLabelsFrame, text="Desired Estate Amount: ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
-L_desiredEstate.place(relx=0.005, rely=0.44)
+L_desiredEstate.place(relx=0.005, rely=0.41)
 
 
 
@@ -213,18 +209,13 @@ E_averageAnnualSalaryIncrease.place(relx=0, rely=0.38, relwidth=1)
 E_averageAnnualSalaryIncrease_ttp = CreateToolTip(E_averageAnnualSalaryIncrease, "Enter estimated average annual salary increase")
 
 
-E_averageAnnualContributionIncrease = tk.Entry(formEntryFrame, bg="white")
-E_averageAnnualContributionIncrease.place(relx=0, rely=0.41, relwidth=1)
-E_averageAnnualContributionIncrease_ttp = CreateToolTip(E_averageAnnualContributionIncrease, "Enter estimated average annual contribution increase")
-
-
 E_desiredEstate = tk.Entry(formEntryFrame, bg="white")
-E_desiredEstate.place(relx=0, rely=0.44, relwidth=1)
+E_desiredEstate.place(relx=0, rely=0.41, relwidth=1)
 E_desiredEstate_ttp = CreateToolTip(E_desiredEstate, "If desired, enter estimated amount you'd like to leave to your heirs")
 
 
 E_comparison = tk.Button(formEntryFrame, text="Add Another Configuration?", command=lambda: compareControl())
-E_comparison.place(relx=0, rely=0.47, relwidth=1)
+E_comparison.place(relx=0, rely=0.44, relwidth=1)
 
 
 def compareControl():
@@ -248,9 +239,8 @@ def compareControl():
     E_desAnnualRetIncomeI2.place(relx=0, rely=0.32, relwidth=1)
     E_averageAnnualReturnRate2.place(relx=0, rely=0.35, relwidth=1)
     E_averageAnnualSalaryIncrease2.place(relx=0, rely=0.38, relwidth=1)
-    E_averageAnnualContributionIncrease2.place(relx=0, rely=0.41, relwidth=1)
-    E_desiredEstate2.place(relx=0, rely=0.44, relwidth=1)
-    E_comparison2.place(relx=0, rely=0.47, relwidth=1)
+    E_desiredEstate2.place(relx=0, rely=0.41, relwidth=1)
+    E_comparison2.place(relx=0, rely=0.44, relwidth=1)
     E_comparison.place_forget()
 
 
@@ -312,10 +302,6 @@ E_averageAnnualSalaryIncrease2 = tk.Entry(formEntryFrame2, bg="white")
 E_averageAnnualSalaryIncrease2_ttp = CreateToolTip(E_averageAnnualSalaryIncrease2, "Enter estimated average annual salary increase")
 
 
-E_averageAnnualContributionIncrease2 = tk.Entry(formEntryFrame2, bg="white")
-E_averageAnnualContributionIncrease2_ttp = CreateToolTip(E_averageAnnualContributionIncrease2, "Enter estimated average annual contribution increase")
-
-
 E_desiredEstate2 = tk.Entry(formEntryFrame2, bg="white")
 E_desiredEstate2_ttp = CreateToolTip(E_desiredEstate2, "If desired, enter estimated amount you'd like to leave to your heirs")
 
@@ -343,8 +329,7 @@ def compareControl2():
     E_desAnnualRetIncomeI3.place(relx=0, rely=0.32, relwidth=1)
     E_averageAnnualReturnRate3.place(relx=0, rely=0.35, relwidth=1)
     E_averageAnnualSalaryIncrease3.place(relx=0, rely=0.38, relwidth=1)
-    E_averageAnnualContributionIncrease3.place(relx=0, rely=0.41, relwidth=1)
-    E_desiredEstate3.place(relx=0, rely=0.44, relwidth=1)
+    E_desiredEstate3.place(relx=0, rely=0.41, relwidth=1)
     E_comparison2.place_forget()
 
 
@@ -408,21 +393,62 @@ E_averageAnnualSalaryIncrease3 = tk.Entry(formEntryFrame3, bg="white")
 E_averageAnnualSalaryIncrease3_ttp = CreateToolTip(E_averageAnnualSalaryIncrease3, "Enter estimated average annual salary increase")
 
 
-E_averageAnnualContributionIncrease3 = tk.Entry(formEntryFrame3, bg="white")
-E_averageAnnualContributionIncrease3_ttp = CreateToolTip(E_averageAnnualContributionIncrease3, "Enter estimated average annual contribution increase")
-
-
 E_desiredEstate3 = tk.Entry(formEntryFrame3, bg="white")
 E_desiredEstate3_ttp = CreateToolTip(E_desiredEstate3, "If desired, enter estimated amount you'd like to leave to your heirs")
 
 
 
-
 B_calculateButton = tk.Button(form, text="Calculate", command=lambda: calculateRetirement())
-B_calculateButton.place(relx=0.11, rely=0.55, relwidth=0.1)
+B_calculateButton.place(relx=0.11, rely=0.52, relwidth=0.1)
 
 B_resetButton = tk.Button(form, text="Reset", command=lambda: clearAll())
-B_resetButton.place(relx=0.26, rely=0.55, relwidth=0.1)
+B_resetButton.place(relx=0.26, rely=0.52, relwidth=0.1)
+
+
+
+
+tablayout = tkk.Notebook(tableFrame)
+tab1 = tk.Frame(tablayout)
+tab1.pack(fill="both")
+
+for row in range(5):
+    for column in range(6):
+        if row==0:
+            label = tk.Entry(tab1, text="Heading : " + str(column))
+            label.config(font=('Arial',14))
+            label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+            tab1.grid_columnconfigure(column, weight=1)
+        else:
+            label=tk.Entry(tab1,text="Row : "+str(row)+" , Column : "+str(column))
+            label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
+            tab1.grid_columnconfigure(column,weight=1)
+
+tablayout.add(tab1,text="TAB 1")
+
+
+#tab2
+tab2=tk.Frame(tablayout)
+tab2.pack(fill="both")
+
+#adding table into tab
+
+for row in range(5):
+    for column in range(6):
+        if row==0:
+            label = tk.Label(tab2, text="Heading : " + str(column), bg="white", fg="black", padx=3,
+                          pady=3)
+            label.config(font=('Arial',14))
+            label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
+            tab2.grid_columnconfigure(column, weight=1)
+        else:
+            label=tk.Label(tab2,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
+            label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
+            tab2.grid_columnconfigure(column,weight=1)
+
+tablayout.add(tab2,text="TAB 2")
+
+#tablayout.pack(fill="both")
+tablayout.place(relx=0, rely=0, relwidth=0.8)
 
 
 
@@ -455,11 +481,15 @@ def clearAll():
     E_desAnnualRetIncomeI.insert('end', "20000")
     E_averageAnnualReturnRate.insert('end', "4")
     E_averageAnnualSalaryIncrease.insert('end', "2")
-    E_averageAnnualContributionIncrease.insert('end', "2")
     E_desiredEstate.insert('end', "100000")
     
 def calculateRetirement():
-    try: 
+    try:
+        rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
+        rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+        ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
+        ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
+        
         firstName = E_fName.get()
         lastName = E_lName.get()
         email = E_Email.get()
@@ -473,27 +503,36 @@ def calculateRetirement():
         darIncomeInactive = float(E_desAnnualRetIncomeI.get())
         avgAnnualReturnRate = float(E_averageAnnualReturnRate.get())
         avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
-        avgAnnualContIncrease = float(E_averageAnnualContributionIncrease.get())
         desiredEstate = float(E_desiredEstate.get())
         currentYear = datetime.datetime.now().year
         retirementTable = []
         tableRows = range(currentAge + 1, 101)
         
+        if retireAge < 62:
+            ssnAmount = 0
+        else:
+            ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
         
         firstRow = []
-        firstRow.append("Year")
-        firstRow.append("Age")
-        firstRow.append("Annual Sal")
-        firstRow.append("Annual Sav")
-        firstRow.append("Growth")
-        firstRow.append("Withdrawal")
-        firstRow.append("Nest Egg")
+        firstRow.append("Year")                     #0
+        firstRow.append("Age")                      #1
+        firstRow.append("Annual Sal")               #2
+        firstRow.append("Annual Sav")               #3
+        firstRow.append("Growth")                   #4
+        firstRow.append("Social Security")          #5
+        firstRow.append("RMD")                      #6
+        firstRow.append("Desired Withdrawal")       #7
+        firstRow.append("Actual Withdrawal")        #8
+        firstRow.append("Nest Egg")                 #9
         
         secondRow = []
         secondRow.append(currentYear)
         currentYear = currentYear + 1
         secondRow.append(currentAge)
         secondRow.append(round(curAnnualSalary))
+        secondRow.append(0)
+        secondRow.append(0)
+        secondRow.append(0)
         secondRow.append(0)
         secondRow.append(0)
         secondRow.append(0)
@@ -505,31 +544,65 @@ def calculateRetirement():
         
         for x in tableRows: 
             thisRow = []
-            
+            #append Year
             thisRow.append(currentYear)
             currentYear = currentYear + 1
             
+            #append Age
             thisRow.append(x)
             
             if x < retireAge:
+                #increase salary and append it
                 curAnnualSalary = curAnnualSalary + (curAnnualSalary * (avgAnnualSalaryIncrease / 100.0))
                 thisRow.append(round(curAnnualSalary))
+                
+                #calculate retirement contribution savings and append it
                 thisRow.append(round(thisRow[2] * (curAnnualContPercent / 100.0)))
+                
+                #calculate returns and append it
                 growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
                 thisRow.append(round(growth))
+                
+                #append zero for [5] - [8]
                 thisRow.append(0)
-                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[5]
+                thisRow.append(0)
+                thisRow.append(0)
+                thisRow.append(0)
+                
+                #calculate new nest egg and append it
+                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4]
                 thisRow.append(round(curRetirmentSavings))
             else:
+                #append zero for salary and savings
                 thisRow.append(0)
                 thisRow.append(0)
+                
+                #calculate and append returns
                 growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
                 thisRow.append(round(growth))
-                thisRow.append(round(darIncomeActive))
-                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[5]
+                
+                if x < 62:
+                    #append zero for [5] - [8]
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                else:
+                    thisRow.append(ssnAmount)
+                    if x < 70:
+                        thisRow.append(0)
+                    else:
+                        rmdFactor = rMD70[rMDAge.index(x)]
+                        rmdValue = curRetirmentSavings / rmdFactor
+                        thisRow.append(round(rmdValue))
+                    thisRow.append(round(darIncomeActive))
+                    if thisRow[7] < thisRow[6]:
+                        thisRow.append(thisRow[6] - thisRow[5])
+                    else: 
+                        thisRow.append(thisRow[7] - thisRow[5])
+                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[8]
                 thisRow.append(round(curRetirmentSavings))
                 
-            
             retirementTable.append(thisRow)
             
             if curRetirmentSavings < 0:
@@ -538,120 +611,17 @@ def calculateRetirement():
         finalAge = retirementTable[len(retirementTable)-1][1]
         #try output
         for y in retirementTable:
-            print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]))
+            print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
         
         
         #extract Nest Egg
         nestEgg = []
         for k in retirementTable:
-            nestEgg.append(k[6])
+            nestEgg.append(k[9])
         plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
-        tablayout = tkk.Notebook(tableFrame)
-        tab1 = tk.Frame(tablayout)
-        tab1.pack(fill="both")
-        
-        for row in range(5):
-            for column in range(6):
-                if row==0:
-                    label = tk.Entry(tab1, text="Heading : " + str(column))
-                    label.config(font=('Arial',14))
-                    label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-                    tab1.grid_columnconfigure(column, weight=1)
-                else:
-                    label=tk.Entry(tab1,text="Row : "+str(row)+" , Column : "+str(column))
-                    label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-                    tab1.grid_columnconfigure(column,weight=1)
-        
-        tablayout.add(tab1,text="TAB 1")
-        
-        
-        #tab2
-        tab2=tk.Frame(tablayout)
-        tab2.pack(fill="both")
-        
-        #adding table into tab
-        
-        for row in range(5):
-            for column in range(6):
-                if row==0:
-                    label = tk.Label(tab2, text="Heading : " + str(column), bg="white", fg="black", padx=3,
-                                  pady=3)
-                    label.config(font=('Arial',14))
-                    label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-                    tab2.grid_columnconfigure(column, weight=1)
-                else:
-                    label=tk.Label(tab2,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
-                    label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-                    tab2.grid_columnconfigure(column,weight=1)
-        
-        tablayout.add(tab2,text="TAB 2")
-        
-        #tablayout.pack(fill="both")
-        tablayout.place(relx=0, rely=0, relwidth=0.8)
-        
-        
+
     except: 
         print("there is an error in your inputs")
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 
 app.mainloop()
