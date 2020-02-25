@@ -452,149 +452,148 @@ def clearAll():
     E_confName.insert('end', 'SnowBall')
     
 def calculateRetirement():
-    try:
-        rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
-        rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
-        ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
-        ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
-        
-        firstName = E_fName.get()
-        lastName = E_lName.get()
-        email = E_Email.get()
-        currentAge = int(E_currentAge.get())
-        retireAge = int(E_retireAge.get())
-        lifeExpectancy = E_lifeExpectancy.get()
-        curAnnualSalary = float(E_currentAnnualSalary.get())
-        curAnnualContPercent =  int(S_annualRetCont.get())
-        curRetirmentSavings = float(E_currentRetSavings.get())
-        darIncomeActive = float(E_desAnnualRetIncomeA.get())
-        darIncomeInactive = float(E_desAnnualRetIncomeI.get())
-        avgAnnualReturnRate = float(E_averageAnnualReturnRate.get())
-        avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
-        desiredEstate = float(E_desiredEstate.get())
-        configurationName = E_confName.get()
-        currentYear = datetime.datetime.now().year
-        retirementTable = []
-        tableRows = range(currentAge + 1, 101)
-        
-        if retireAge < 62:
-            ssnAmount = 0
-        else:
-            ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
-        
-        firstRow = []
-        firstRow.append("Year")                     #0
-        firstRow.append("Age")                      #1
-        firstRow.append("Annual Sal")               #2
-        firstRow.append("Annual Sav")               #3
-        firstRow.append("Growth")                   #4
-        firstRow.append("Soc Sec")                  #5
-        firstRow.append("RMD")                      #6
-        firstRow.append("Desired Sal")              #7
-        firstRow.append("Withdrawn")                #8
-        firstRow.append("Nest Egg")                 #9
-        
-        secondRow = []
-        secondRow.append(currentYear)
-        currentYear = currentYear + 1
-        secondRow.append(currentAge)
-        secondRow.append(round(curAnnualSalary))
-        secondRow.append(0)
-        secondRow.append(0)
-        secondRow.append(0)
-        secondRow.append(0)
-        secondRow.append(0)
-        secondRow.append(0)
-        secondRow.append(round(curRetirmentSavings))
-        
-        retirementTable.append(firstRow)
-        retirementTable.append(secondRow)
-        
-        
-        for x in tableRows: 
-            thisRow = []
-            #append Year
-            thisRow.append(currentYear)
-            currentYear = currentYear + 1
+    if numOfConfigurations == 1:
+        try:
+            rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
+            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+            ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
+            ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
             
-            #append Age
-            thisRow.append(x)
+            firstName = E_fName.get()
+            lastName = E_lName.get()
+            email = E_Email.get()
+            currentAge = int(E_currentAge.get())
+            retireAge = int(E_retireAge.get())
+            lifeExpectancy = E_lifeExpectancy.get()
+            curAnnualSalary = float(E_currentAnnualSalary.get())
+            curAnnualContPercent =  int(S_annualRetCont.get())
+            curRetirmentSavings = float(E_currentRetSavings.get())
+            darIncomeActive = float(E_desAnnualRetIncomeA.get())
+            darIncomeInactive = float(E_desAnnualRetIncomeI.get())
+            avgAnnualReturnRate = float(E_averageAnnualReturnRate.get())
+            avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
+            desiredEstate = float(E_desiredEstate.get())
+            configurationName = E_confName.get()
+            currentYear = datetime.datetime.now().year
+            retirementTable = []
+            tableRows = range(currentAge + 1, 101)
             
-            if x < retireAge:
-                #increase salary and append it
-                curAnnualSalary = curAnnualSalary + (curAnnualSalary * (avgAnnualSalaryIncrease / 100.0))
-                thisRow.append(round(curAnnualSalary))
-                
-                #calculate retirement contribution savings and append it
-                thisRow.append(round(thisRow[2] * (curAnnualContPercent / 100.0)))
-                
-                #calculate returns and append it
-                growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
-                thisRow.append(round(growth))
-                
-                #append zero for [5] - [8]
-                thisRow.append(0)
-                thisRow.append(0)
-                thisRow.append(0)
-                thisRow.append(0)
-                
-                #calculate new nest egg and append it
-                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4]
-                thisRow.append(round(curRetirmentSavings))
+            if retireAge < 62:
+                ssnAmount = 0
             else:
-                #append zero for salary and savings
-                thisRow.append(0)
-                thisRow.append(0)
+                ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
+            
+            firstRow = []
+            firstRow.append("Year")                     #0
+            firstRow.append("Age")                      #1
+            firstRow.append("Annual Sal")               #2
+            firstRow.append("Annual Sav")               #3
+            firstRow.append("Growth")                   #4
+            firstRow.append("Soc Sec")                  #5
+            firstRow.append("RMD")                      #6
+            firstRow.append("Desired Sal")              #7
+            firstRow.append("Withdrawn")                #8
+            firstRow.append("Nest Egg")                 #9
+            
+            secondRow = []
+            secondRow.append(currentYear)
+            currentYear = currentYear + 1
+            secondRow.append(currentAge)
+            secondRow.append(round(curAnnualSalary))
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(round(curRetirmentSavings))
+            
+            retirementTable.append(firstRow)
+            retirementTable.append(secondRow)
+            
+            
+            for x in tableRows: 
+                thisRow = []
+                #append Year
+                thisRow.append(currentYear)
+                currentYear = currentYear + 1
                 
-                #calculate and append returns
-                growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
-                thisRow.append(round(growth))
+                #append Age
+                thisRow.append(x)
                 
-                if x < 62:
+                if x < retireAge:
+                    #increase salary and append it
+                    curAnnualSalary = curAnnualSalary + (curAnnualSalary * (avgAnnualSalaryIncrease / 100.0))
+                    thisRow.append(round(curAnnualSalary))
+                    
+                    #calculate retirement contribution savings and append it
+                    thisRow.append(round(thisRow[2] * (curAnnualContPercent / 100.0)))
+                    
+                    #calculate returns and append it
+                    growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
+                    thisRow.append(round(growth))
+                    
                     #append zero for [5] - [8]
                     thisRow.append(0)
                     thisRow.append(0)
                     thisRow.append(0)
                     thisRow.append(0)
+                    
+                    #calculate new nest egg and append it
+                    curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4]
+                    thisRow.append(round(curRetirmentSavings))
                 else:
-                    thisRow.append(ssnAmount)
-                    if x < 70:
+                    #append zero for salary and savings
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate and append returns
+                    growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
+                    thisRow.append(round(growth))
+                    
+                    if x < 62:
+                        #append zero for [5] - [8]
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
                         thisRow.append(0)
                     else:
-                        rmdFactor = rMD70[rMDAge.index(x)]
-                        rmdValue = curRetirmentSavings / rmdFactor
-                        thisRow.append(round(rmdValue))
-                    thisRow.append(round(darIncomeActive))
-                    if thisRow[7] < thisRow[6]:
-                        thisRow.append(thisRow[6] - thisRow[5])
-                    else: 
-                        thisRow.append(thisRow[7] - thisRow[5])
-                curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[8]
-                thisRow.append(round(curRetirmentSavings))
+                        thisRow.append(ssnAmount)
+                        if x < 70:
+                            thisRow.append(0)
+                        else:
+                            rmdFactor = rMD70[rMDAge.index(x)]
+                            rmdValue = curRetirmentSavings / rmdFactor
+                            thisRow.append(round(rmdValue))
+                        thisRow.append(round(darIncomeActive))
+                        if thisRow[7] < thisRow[6]:
+                            thisRow.append(thisRow[6] - thisRow[5])
+                        else: 
+                            thisRow.append(thisRow[7] - thisRow[5])
+                    curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[8]
+                    thisRow.append(round(curRetirmentSavings))
+                    
+                retirementTable.append(thisRow)
                 
-            retirementTable.append(thisRow)
+                if curRetirmentSavings < 0:
+                    break
             
-            if curRetirmentSavings < 0:
-                break
-        
-        finalAge = retirementTable[len(retirementTable)-1][1]
-        #try output
-        for y in retirementTable:
-            print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
-        
-        
-        #extract Nest Egg
-        nestEgg = []
-        for k in retirementTable:
-            nestEgg.append(k[9])
-        plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
-        
-        
-        
-        s = tkk.Style()
-        s.configure('TNotebook.Tab', font=('Helvetica', '11', 'bold'))
-        
-        if numOfConfigurations == 1:
+            finalAge = retirementTable[len(retirementTable)-1][1]
+            #try output
+            for y in retirementTable:
+                print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
+            
+            
+            #extract Nest Egg
+            nestEgg = []
+            for k in retirementTable:
+                nestEgg.append(k[9])
+            plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
+            
+            
+            
+            s = tkk.Style()
+            s.configure('TNotebook.Tab', font=('Helvetica', '11', 'bold'))
             tablayout = tkk.Notebook(tableFrame)
             tab1 = tk.Frame(tablayout)
             tab1.pack(fill="both")
@@ -620,7 +619,188 @@ def calculateRetirement():
               
             for line in retirementTable[1:]:  
                 mylist.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
-
+    
+              
+            mylist.pack( side = tk.LEFT )  
+            sb.config( command = mylist.yview ) 
+            sb2.config( command = xview)
+            
+            tablayout.add(tab1,text=configurationName)
+            #tablayout.pack(fill="both")
+            tablayout.place(relx=0.005, rely=0, relwidth=0.99)
+        except: 
+            print("there is an error in your inputs")
+    
+    
+    
+    if numOfConfigurations == 2:
+        try:
+            rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
+            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+            ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
+            ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
+            
+            firstName = E_fName.get()
+            lastName = E_lName.get()
+            email = E_Email.get()
+            currentAge = int(E_currentAge.get())
+            retireAge = int(E_retireAge.get())
+            lifeExpectancy = E_lifeExpectancy.get()
+            curAnnualSalary = float(E_currentAnnualSalary.get())
+            curAnnualContPercent =  int(S_annualRetCont.get())
+            curRetirmentSavings = float(E_currentRetSavings.get())
+            darIncomeActive = float(E_desAnnualRetIncomeA.get())
+            darIncomeInactive = float(E_desAnnualRetIncomeI.get())
+            avgAnnualReturnRate = float(E_averageAnnualReturnRate.get())
+            avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
+            desiredEstate = float(E_desiredEstate.get())
+            configurationName = E_confName.get()
+            currentYear = datetime.datetime.now().year
+            retirementTable = []
+            tableRows = range(currentAge + 1, 101)
+            
+            if retireAge < 62:
+                ssnAmount = 0
+            else:
+                ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
+            
+            firstRow = []
+            firstRow.append("Year")                     #0
+            firstRow.append("Age")                      #1
+            firstRow.append("Annual Sal")               #2
+            firstRow.append("Annual Sav")               #3
+            firstRow.append("Growth")                   #4
+            firstRow.append("Soc Sec")                  #5
+            firstRow.append("RMD")                      #6
+            firstRow.append("Desired Sal")              #7
+            firstRow.append("Withdrawn")                #8
+            firstRow.append("Nest Egg")                 #9
+            
+            secondRow = []
+            secondRow.append(currentYear)
+            currentYear = currentYear + 1
+            secondRow.append(currentAge)
+            secondRow.append(round(curAnnualSalary))
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(round(curRetirmentSavings))
+            
+            retirementTable.append(firstRow)
+            retirementTable.append(secondRow)
+            
+            
+            for x in tableRows: 
+                thisRow = []
+                #append Year
+                thisRow.append(currentYear)
+                currentYear = currentYear + 1
+                
+                #append Age
+                thisRow.append(x)
+                
+                if x < retireAge:
+                    #increase salary and append it
+                    curAnnualSalary = curAnnualSalary + (curAnnualSalary * (avgAnnualSalaryIncrease / 100.0))
+                    thisRow.append(round(curAnnualSalary))
+                    
+                    #calculate retirement contribution savings and append it
+                    thisRow.append(round(thisRow[2] * (curAnnualContPercent / 100.0)))
+                    
+                    #calculate returns and append it
+                    growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
+                    thisRow.append(round(growth))
+                    
+                    #append zero for [5] - [8]
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate new nest egg and append it
+                    curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4]
+                    thisRow.append(round(curRetirmentSavings))
+                else:
+                    #append zero for salary and savings
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate and append returns
+                    growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
+                    thisRow.append(round(growth))
+                    
+                    if x < 62:
+                        #append zero for [5] - [8]
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                    else:
+                        thisRow.append(ssnAmount)
+                        if x < 70:
+                            thisRow.append(0)
+                        else:
+                            rmdFactor = rMD70[rMDAge.index(x)]
+                            rmdValue = curRetirmentSavings / rmdFactor
+                            thisRow.append(round(rmdValue))
+                        thisRow.append(round(darIncomeActive))
+                        if thisRow[7] < thisRow[6]:
+                            thisRow.append(thisRow[6] - thisRow[5])
+                        else: 
+                            thisRow.append(thisRow[7] - thisRow[5])
+                    curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[8]
+                    thisRow.append(round(curRetirmentSavings))
+                    
+                retirementTable.append(thisRow)
+                
+                if curRetirmentSavings < 0:
+                    break
+            
+            finalAge = retirementTable[len(retirementTable)-1][1]
+            #try output
+            for y in retirementTable:
+                print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
+            
+            
+            #extract Nest Egg
+            nestEgg = []
+            for k in retirementTable:
+                nestEgg.append(k[9])
+            plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
+            
+            
+            
+            s = tkk.Style()
+            s.configure('TNotebook.Tab', font=('Helvetica', '11', 'bold'))
+            tablayout = tkk.Notebook(tableFrame)
+            tab1 = tk.Frame(tablayout)
+            tab1.pack(fill="both")
+            
+            sb = tk.Scrollbar(tab1)
+            sb2 = tk.Scrollbar(tab1, orient='horizontal')
+            
+            sb.pack(side = tk.RIGHT, fill = tk.Y)
+            sb2.pack(side = tk.BOTTOM, fill = tk.X)
+            
+            mylist1 = tk.Listbox(tab1, height=1, width=154, font=("Monaco 11 bold"))  
+              
+            for line in range(1,2):  
+                mylist1.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",retirementTable[0][0],"|",retirementTable[0][1],"|",retirementTable[0][2],"|",retirementTable[0][3],"|",retirementTable[0][4],"|",retirementTable[0][5],"|",retirementTable[0][6],"|",retirementTable[0][7],"|",retirementTable[0][8],"|",retirementTable[0][9],"|"))  
+              
+            mylist1.pack( side = tk.TOP )  
+              
+            def xview(*args):
+                mylist1.xview(*args)
+                mylist.xview(*args)
+            
+            mylist = tk.Listbox(tab1, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
+              
+            for line in retirementTable[1:]:  
+                mylist.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
+    
               
             mylist.pack( side = tk.LEFT )  
             sb.config( command = mylist.yview ) 
@@ -631,12 +811,704 @@ def calculateRetirement():
             tablayout.place(relx=0.005, rely=0, relwidth=0.99)
             
             
-
-        
-        
-
-    except: 
-        print("there is an error in your inputs")
+            
+            
+            firstName2 = E_fName2.get()
+            lastName2 = E_lName2.get()
+            email2 = E_Email2.get()
+            currentAge2 = int(E_currentAge2.get())
+            retireAge2 = int(E_retireAge2.get())
+            lifeExpectancy2 = E_lifeExpectancy2.get()
+            curAnnualSalary2 = float(E_currentAnnualSalary2.get())
+            curAnnualContPercent2 =  int(S_annualRetCont2.get())
+            curRetirmentSavings2 = float(E_currentRetSavings2.get())
+            darIncomeActive2 = float(E_desAnnualRetIncomeA2.get())
+            darIncomeInactive2 = float(E_desAnnualRetIncomeI2.get())
+            avgAnnualReturnRate2 = float(E_averageAnnualReturnRate2.get())
+            avgAnnualSalaryIncrease2 = float(E_averageAnnualSalaryIncrease2.get())
+            desiredEstate2 = float(E_desiredEstate2.get())
+            configurationName2 = E_confName2.get()
+            currentYear2 = datetime.datetime.now().year
+            retirementTable2 = []
+            tableRows2 = range(currentAge2 + 1, 101)
+            
+            if retireAge2 < 62:
+                ssnAmount = 0
+            else:
+                ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge2)])
+            
+            firstRow2 = []
+            firstRow2.append("Year")                     #0
+            firstRow2.append("Age")                      #1
+            firstRow2.append("Annual Sal")               #2
+            firstRow2.append("Annual Sav")               #3
+            firstRow2.append("Growth")                   #4
+            firstRow2.append("Soc Sec")                  #5
+            firstRow2.append("RMD")                      #6
+            firstRow2.append("Desired Sal")              #7
+            firstRow2.append("Withdrawn")                #8
+            firstRow2.append("Nest Egg")                 #9
+            
+            secondRow2 = []
+            secondRow2.append(currentYear2)
+            currentYear2 = currentYear2 + 1
+            secondRow2.append(currentAge2)
+            secondRow2.append(round(curAnnualSalary2))
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(round(curRetirmentSavings2))
+            
+            retirementTable2.append(firstRow2)
+            retirementTable2.append(secondRow2)
+            
+            
+            for x in tableRows2: 
+                thisRow = []
+                #append Year
+                thisRow.append(currentYear2)
+                currentYear2 = currentYear2 + 1
+                
+                #append Age
+                thisRow.append(x)
+                
+                if x < retireAge2:
+                    #increase salary and append it
+                    curAnnualSalary2 = curAnnualSalary2 + (curAnnualSalary2 * (avgAnnualSalaryIncrease2 / 100.0))
+                    thisRow.append(round(curAnnualSalary2))
+                    
+                    #calculate retirement contribution savings and append it
+                    thisRow.append(round(thisRow[2] * (curAnnualContPercent2 / 100.0)))
+                    
+                    #calculate returns and append it
+                    growth = (avgAnnualReturnRate2 / 100.0) * curRetirmentSavings2
+                    thisRow.append(round(growth))
+                    
+                    #append zero for [5] - [8]
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate new nest egg and append it
+                    curRetirmentSavings2 = curRetirmentSavings2 + thisRow[3] + thisRow[4]
+                    thisRow.append(round(curRetirmentSavings2))
+                else:
+                    #append zero for salary and savings
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate and append returns
+                    growth = (avgAnnualReturnRate2 / 100.0) * curRetirmentSavings2
+                    thisRow.append(round(growth))
+                    
+                    if x < 62:
+                        #append zero for [5] - [8]
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                    else:
+                        thisRow.append(ssnAmount)
+                        if x < 70:
+                            thisRow.append(0)
+                        else:
+                            rmdFactor = rMD70[rMDAge.index(x)]
+                            rmdValue = curRetirmentSavings2 / rmdFactor
+                            thisRow.append(round(rmdValue))
+                        thisRow.append(round(darIncomeActive2))
+                        if thisRow[7] < thisRow[6]:
+                            thisRow.append(thisRow[6] - thisRow[5])
+                        else: 
+                            thisRow.append(thisRow[7] - thisRow[5])
+                    curRetirmentSavings2 = curRetirmentSavings2 + thisRow[3] + thisRow[4] - thisRow[8]
+                    thisRow.append(round(curRetirmentSavings2))
+                    
+                retirementTable2.append(thisRow)
+                
+                if curRetirmentSavings2 < 0:
+                    break
+            
+            finalAge2 = retirementTable2[len(retirementTable2)-1][1]
+            #try output
+            for y in retirementTable2:
+                print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
+            
+            
+            #extract Nest Egg
+            nestEgg2 = []
+            for k in retirementTable2:
+                nestEgg2.append(k[9])
+            plt.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:])
+            
+            
+            
+            
+            
+            tab2 = tk.Frame(tablayout)
+            tab2.pack(fill="both")
+            
+            sb2 = tk.Scrollbar(tab2)
+            sb22 = tk.Scrollbar(tab2, orient='horizontal')
+            
+            sb2.pack(side = tk.RIGHT, fill = tk.Y)
+            sb22.pack(side = tk.BOTTOM, fill = tk.X)
+            
+            mylist12 = tk.Listbox(tab2, height=1, width=154, font=("Monaco 11 bold"))  
+              
+            for line in range(1,2):  
+                mylist12.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",retirementTable[0][0],"|",retirementTable[0][1],"|",retirementTable[0][2],"|",retirementTable[0][3],"|",retirementTable[0][4],"|",retirementTable[0][5],"|",retirementTable[0][6],"|",retirementTable[0][7],"|",retirementTable[0][8],"|",retirementTable[0][9],"|"))  
+              
+            mylist12.pack( side = tk.TOP )  
+              
+            def xview(*args):
+                mylist12.xview(*args)
+                mylist2.xview(*args)
+            
+            mylist2 = tk.Listbox(tab2, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb2.set, xscrollcommand = sb22.set )  
+              
+            for line in retirementTable2[1:]:  
+                mylist2.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
     
+              
+            mylist2.pack( side = tk.LEFT )  
+            sb2.config( command = mylist2.yview ) 
+            sb22.config( command = xview)
+            
+            tablayout.add(tab2,text=configurationName2)
+            #tablayout.pack(fill="both")
+            tablayout.place(relx=0.005, rely=0, relwidth=0.99)
+            
+            
+        except: 
+            print("there is an error in your inputs")
+    
+    
+    
+    if numOfConfigurations == 3:
+        try:
+            rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
+            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+            ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
+            ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
+            
+            firstName = E_fName.get()
+            lastName = E_lName.get()
+            email = E_Email.get()
+            currentAge = int(E_currentAge.get())
+            retireAge = int(E_retireAge.get())
+            lifeExpectancy = E_lifeExpectancy.get()
+            curAnnualSalary = float(E_currentAnnualSalary.get())
+            curAnnualContPercent =  int(S_annualRetCont.get())
+            curRetirmentSavings = float(E_currentRetSavings.get())
+            darIncomeActive = float(E_desAnnualRetIncomeA.get())
+            darIncomeInactive = float(E_desAnnualRetIncomeI.get())
+            avgAnnualReturnRate = float(E_averageAnnualReturnRate.get())
+            avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
+            desiredEstate = float(E_desiredEstate.get())
+            configurationName = E_confName.get()
+            currentYear = datetime.datetime.now().year
+            retirementTable = []
+            tableRows = range(currentAge + 1, 101)
+            
+            if retireAge < 62:
+                ssnAmount = 0
+            else:
+                ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
+            
+            firstRow = []
+            firstRow.append("Year")                     #0
+            firstRow.append("Age")                      #1
+            firstRow.append("Annual Sal")               #2
+            firstRow.append("Annual Sav")               #3
+            firstRow.append("Growth")                   #4
+            firstRow.append("Soc Sec")                  #5
+            firstRow.append("RMD")                      #6
+            firstRow.append("Desired Sal")              #7
+            firstRow.append("Withdrawn")                #8
+            firstRow.append("Nest Egg")                 #9
+            
+            secondRow = []
+            secondRow.append(currentYear)
+            currentYear = currentYear + 1
+            secondRow.append(currentAge)
+            secondRow.append(round(curAnnualSalary))
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(0)
+            secondRow.append(round(curRetirmentSavings))
+            
+            retirementTable.append(firstRow)
+            retirementTable.append(secondRow)
+            
+            
+            for x in tableRows: 
+                thisRow = []
+                #append Year
+                thisRow.append(currentYear)
+                currentYear = currentYear + 1
+                
+                #append Age
+                thisRow.append(x)
+                
+                if x < retireAge:
+                    #increase salary and append it
+                    curAnnualSalary = curAnnualSalary + (curAnnualSalary * (avgAnnualSalaryIncrease / 100.0))
+                    thisRow.append(round(curAnnualSalary))
+                    
+                    #calculate retirement contribution savings and append it
+                    thisRow.append(round(thisRow[2] * (curAnnualContPercent / 100.0)))
+                    
+                    #calculate returns and append it
+                    growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
+                    thisRow.append(round(growth))
+                    
+                    #append zero for [5] - [8]
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate new nest egg and append it
+                    curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4]
+                    thisRow.append(round(curRetirmentSavings))
+                else:
+                    #append zero for salary and savings
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate and append returns
+                    growth = (avgAnnualReturnRate / 100.0) * curRetirmentSavings
+                    thisRow.append(round(growth))
+                    
+                    if x < 62:
+                        #append zero for [5] - [8]
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                    else:
+                        thisRow.append(ssnAmount)
+                        if x < 70:
+                            thisRow.append(0)
+                        else:
+                            rmdFactor = rMD70[rMDAge.index(x)]
+                            rmdValue = curRetirmentSavings / rmdFactor
+                            thisRow.append(round(rmdValue))
+                        thisRow.append(round(darIncomeActive))
+                        if thisRow[7] < thisRow[6]:
+                            thisRow.append(thisRow[6] - thisRow[5])
+                        else: 
+                            thisRow.append(thisRow[7] - thisRow[5])
+                    curRetirmentSavings = curRetirmentSavings + thisRow[3] + thisRow[4] - thisRow[8]
+                    thisRow.append(round(curRetirmentSavings))
+                    
+                retirementTable.append(thisRow)
+                
+                if curRetirmentSavings < 0:
+                    break
+            
+            finalAge = retirementTable[len(retirementTable)-1][1]
+            #try output
+            for y in retirementTable:
+                print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
+            
+            
+            #extract Nest Egg
+            nestEgg = []
+            for k in retirementTable:
+                nestEgg.append(k[9])
+            plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
+            
+            
+            
+            s = tkk.Style()
+            s.configure('TNotebook.Tab', font=('Helvetica', '11', 'bold'))
+            tablayout = tkk.Notebook(tableFrame)
+            tab1 = tk.Frame(tablayout)
+            tab1.pack(fill="both")
+            
+            sb = tk.Scrollbar(tab1)
+            sb2 = tk.Scrollbar(tab1, orient='horizontal')
+            
+            sb.pack(side = tk.RIGHT, fill = tk.Y)
+            sb2.pack(side = tk.BOTTOM, fill = tk.X)
+            
+            mylist1 = tk.Listbox(tab1, height=1, width=154, font=("Monaco 11 bold"))  
+              
+            for line in range(1,2):  
+                mylist1.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",retirementTable[0][0],"|",retirementTable[0][1],"|",retirementTable[0][2],"|",retirementTable[0][3],"|",retirementTable[0][4],"|",retirementTable[0][5],"|",retirementTable[0][6],"|",retirementTable[0][7],"|",retirementTable[0][8],"|",retirementTable[0][9],"|"))  
+              
+            mylist1.pack( side = tk.TOP )  
+              
+            def xview(*args):
+                mylist1.xview(*args)
+                mylist.xview(*args)
+            
+            mylist = tk.Listbox(tab1, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
+              
+            for line in retirementTable[1:]:  
+                mylist.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
+    
+              
+            mylist.pack( side = tk.LEFT )  
+            sb.config( command = mylist.yview ) 
+            sb2.config( command = xview)
+            
+            tablayout.add(tab1,text=configurationName)
+            #tablayout.pack(fill="both")
+            tablayout.place(relx=0.005, rely=0, relwidth=0.99)
+            
+            
+            
+            
+            firstName2 = E_fName2.get()
+            lastName2 = E_lName2.get()
+            email2 = E_Email2.get()
+            currentAge2 = int(E_currentAge2.get())
+            retireAge2 = int(E_retireAge2.get())
+            lifeExpectancy2 = E_lifeExpectancy2.get()
+            curAnnualSalary2 = float(E_currentAnnualSalary2.get())
+            curAnnualContPercent2 =  int(S_annualRetCont2.get())
+            curRetirmentSavings2 = float(E_currentRetSavings2.get())
+            darIncomeActive2 = float(E_desAnnualRetIncomeA2.get())
+            darIncomeInactive2 = float(E_desAnnualRetIncomeI2.get())
+            avgAnnualReturnRate2 = float(E_averageAnnualReturnRate2.get())
+            avgAnnualSalaryIncrease2 = float(E_averageAnnualSalaryIncrease2.get())
+            desiredEstate2 = float(E_desiredEstate2.get())
+            configurationName2 = E_confName2.get()
+            currentYear2 = datetime.datetime.now().year
+            retirementTable2 = []
+            tableRows2 = range(currentAge2 + 1, 101)
+            
+            if retireAge2 < 62:
+                ssnAmount = 0
+            else:
+                ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge2)])
+            
+            firstRow2 = []
+            firstRow2.append("Year")                     #0
+            firstRow2.append("Age")                      #1
+            firstRow2.append("Annual Sal")               #2
+            firstRow2.append("Annual Sav")               #3
+            firstRow2.append("Growth")                   #4
+            firstRow2.append("Soc Sec")                  #5
+            firstRow2.append("RMD")                      #6
+            firstRow2.append("Desired Sal")              #7
+            firstRow2.append("Withdrawn")                #8
+            firstRow2.append("Nest Egg")                 #9
+            
+            secondRow2 = []
+            secondRow2.append(currentYear2)
+            currentYear2 = currentYear2 + 1
+            secondRow2.append(currentAge2)
+            secondRow2.append(round(curAnnualSalary2))
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(0)
+            secondRow2.append(round(curRetirmentSavings2))
+            
+            retirementTable2.append(firstRow2)
+            retirementTable2.append(secondRow2)
+            
+            
+            for x in tableRows2: 
+                thisRow = []
+                #append Year
+                thisRow.append(currentYear2)
+                currentYear2 = currentYear2 + 1
+                
+                #append Age
+                thisRow.append(x)
+                
+                if x < retireAge2:
+                    #increase salary and append it
+                    curAnnualSalary2 = curAnnualSalary2 + (curAnnualSalary2 * (avgAnnualSalaryIncrease2 / 100.0))
+                    thisRow.append(round(curAnnualSalary2))
+                    
+                    #calculate retirement contribution savings and append it
+                    thisRow.append(round(thisRow[2] * (curAnnualContPercent2 / 100.0)))
+                    
+                    #calculate returns and append it
+                    growth = (avgAnnualReturnRate2 / 100.0) * curRetirmentSavings2
+                    thisRow.append(round(growth))
+                    
+                    #append zero for [5] - [8]
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate new nest egg and append it
+                    curRetirmentSavings2 = curRetirmentSavings2 + thisRow[3] + thisRow[4]
+                    thisRow.append(round(curRetirmentSavings2))
+                else:
+                    #append zero for salary and savings
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate and append returns
+                    growth = (avgAnnualReturnRate2 / 100.0) * curRetirmentSavings2
+                    thisRow.append(round(growth))
+                    
+                    if x < 62:
+                        #append zero for [5] - [8]
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                    else:
+                        thisRow.append(ssnAmount)
+                        if x < 70:
+                            thisRow.append(0)
+                        else:
+                            rmdFactor = rMD70[rMDAge.index(x)]
+                            rmdValue = curRetirmentSavings2 / rmdFactor
+                            thisRow.append(round(rmdValue))
+                        thisRow.append(round(darIncomeActive2))
+                        if thisRow[7] < thisRow[6]:
+                            thisRow.append(thisRow[6] - thisRow[5])
+                        else: 
+                            thisRow.append(thisRow[7] - thisRow[5])
+                    curRetirmentSavings2 = curRetirmentSavings2 + thisRow[3] + thisRow[4] - thisRow[8]
+                    thisRow.append(round(curRetirmentSavings2))
+                    
+                retirementTable2.append(thisRow)
+                
+                if curRetirmentSavings2 < 0:
+                    break
+            
+            finalAge2 = retirementTable2[len(retirementTable2)-1][1]
+            #try output
+            for y in retirementTable2:
+                print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
+            
+            
+            #extract Nest Egg
+            nestEgg2 = []
+            for k in retirementTable2:
+                nestEgg2.append(k[9])
+            plt.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:])
+            
+            
+            
+            
+            
+            tab2 = tk.Frame(tablayout)
+            tab2.pack(fill="both")
+            
+            sb2 = tk.Scrollbar(tab2)
+            sb22 = tk.Scrollbar(tab2, orient='horizontal')
+            
+            sb2.pack(side = tk.RIGHT, fill = tk.Y)
+            sb22.pack(side = tk.BOTTOM, fill = tk.X)
+            
+            mylist12 = tk.Listbox(tab2, height=1, width=154, font=("Monaco 11 bold"))  
+              
+            for line in range(1,2):  
+                mylist12.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",retirementTable[0][0],"|",retirementTable[0][1],"|",retirementTable[0][2],"|",retirementTable[0][3],"|",retirementTable[0][4],"|",retirementTable[0][5],"|",retirementTable[0][6],"|",retirementTable[0][7],"|",retirementTable[0][8],"|",retirementTable[0][9],"|"))  
+              
+            mylist12.pack( side = tk.TOP )  
+              
+            def xview(*args):
+                mylist12.xview(*args)
+                mylist2.xview(*args)
+            
+            mylist2 = tk.Listbox(tab2, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb2.set, xscrollcommand = sb22.set )  
+              
+            for line in retirementTable2[1:]:  
+                mylist2.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
+    
+              
+            mylist2.pack( side = tk.LEFT )  
+            sb2.config( command = mylist2.yview ) 
+            sb22.config( command = xview)
+            
+            tablayout.add(tab2,text=configurationName2)
+            #tablayout.pack(fill="both")
+            tablayout.place(relx=0.005, rely=0, relwidth=0.99)
+            
+            
+            firstName3 = E_fName3.get()
+            lastName2 = E_lName3.get()
+            email3 = E_Email3.get()
+            currentAge3 = int(E_currentAge3.get())
+            retireAge3 = int(E_retireAge3.get())
+            lifeExpectancy3 = E_lifeExpectancy3.get()
+            curAnnualSalary3 = float(E_currentAnnualSalary3.get())
+            curAnnualContPercent3 =  int(S_annualRetCont3.get())
+            curRetirmentSavings3 = float(E_currentRetSavings3.get())
+            darIncomeActive3 = float(E_desAnnualRetIncomeA3.get())
+            darIncomeInactive3 = float(E_desAnnualRetIncomeI3.get())
+            avgAnnualReturnRate3 = float(E_averageAnnualReturnRate3.get())
+            avgAnnualSalaryIncrease3 = float(E_averageAnnualSalaryIncrease3.get())
+            desiredEstate3 = float(E_desiredEstate3.get())
+            configurationName3 = E_confName3.get()
+            currentYear3 = datetime.datetime.now().year
+            retirementTable3 = []
+            tableRows3 = range(currentAge3 + 1, 101)
+            
+            if retireAge3 < 62:
+                ssnAmount = 0
+            else:
+                ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge3)])
+            
+            firstRow3 = []
+            firstRow3.append("Year")                     #0
+            firstRow3.append("Age")                      #1
+            firstRow3.append("Annual Sal")               #2
+            firstRow3.append("Annual Sav")               #3
+            firstRow3.append("Growth")                   #4
+            firstRow3.append("Soc Sec")                  #5
+            firstRow3.append("RMD")                      #6
+            firstRow3.append("Desired Sal")              #7
+            firstRow3.append("Withdrawn")                #8
+            firstRow3.append("Nest Egg")                 #9
+            
+            secondRow3= []
+            secondRow3.append(currentYear3)
+            currentYear3 = currentYear3 + 1
+            secondRow3.append(currentAge3)
+            secondRow3.append(round(curAnnualSalary3))
+            secondRow3.append(0)
+            secondRow3.append(0)
+            secondRow3.append(0)
+            secondRow3.append(0)
+            secondRow3.append(0)
+            secondRow3.append(0)
+            secondRow3.append(round(curRetirmentSavings3))
+            
+            retirementTable3.append(firstRow3)
+            retirementTable3.append(secondRow3)
+            
+            
+            for x in tableRows3: 
+                thisRow = []
+                #append Year
+                thisRow.append(currentYear3)
+                currentYear3 = currentYear3 + 1
+                
+                #append Age
+                thisRow.append(x)
+                
+                if x < retireAge3:
+                    #increase salary and append it
+                    curAnnualSalary3 = curAnnualSalary3 + (curAnnualSalary3 * (avgAnnualSalaryIncrease3 / 100.0))
+                    thisRow.append(round(curAnnualSalary3))
+                    
+                    #calculate retirement contribution savings and append it
+                    thisRow.append(round(thisRow[2] * (curAnnualContPercent3 / 100.0)))
+                    
+                    #calculate returns and append it
+                    growth = (avgAnnualReturnRate3 / 100.0) * curRetirmentSavings3
+                    thisRow.append(round(growth))
+                    
+                    #append zero for [5] - [8]
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate new nest egg and append it
+                    curRetirmentSavings3 = curRetirmentSavings3 + thisRow[3] + thisRow[4]
+                    thisRow.append(round(curRetirmentSavings3))
+                else:
+                    #append zero for salary and savings
+                    thisRow.append(0)
+                    thisRow.append(0)
+                    
+                    #calculate and append returns
+                    growth = (avgAnnualReturnRate3 / 100.0) * curRetirmentSavings3
+                    thisRow.append(round(growth))
+                    
+                    if x < 62:
+                        #append zero for [5] - [8]
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                        thisRow.append(0)
+                    else:
+                        thisRow.append(ssnAmount)
+                        if x < 70:
+                            thisRow.append(0)
+                        else:
+                            rmdFactor = rMD70[rMDAge.index(x)]
+                            rmdValue = curRetirmentSavings3 / rmdFactor
+                            thisRow.append(round(rmdValue))
+                        thisRow.append(round(darIncomeActive3))
+                        if thisRow[7] < thisRow[6]:
+                            thisRow.append(thisRow[6] - thisRow[5])
+                        else: 
+                            thisRow.append(thisRow[7] - thisRow[5])
+                    curRetirmentSavings3 = curRetirmentSavings3 + thisRow[3] + thisRow[4] - thisRow[8]
+                    thisRow.append(round(curRetirmentSavings3))
+                    
+                retirementTable3.append(thisRow)
+                
+                if curRetirmentSavings3 < 0:
+                    break
+            
+            finalAge3 = retirementTable3[len(retirementTable3)-1][1]
+            #try output
+            for y in retirementTable3:
+                print(y[0], "{0:>5}".format(y[1]), "{0:>10}".format(y[2]), "{0:>10}".format(y[3]), "{0:>10}".format(y[4]), "{0:>10}".format(y[5]), "{0:>10}".format(y[6]), "{0:>10}".format(y[7]), "{0:>10}".format(y[8]), "{0:>10}".format(y[9]))
+            
+            
+            #extract Nest Egg
+            nestEgg3 = []
+            for k in retirementTable3:
+                nestEgg3.append(k[9])
+            plt.plot(range(currentAge3, finalAge3 + 1), nestEgg3[1:])
+            
+            
+            
+            
+            
+            tab3 = tk.Frame(tablayout)
+            tab3.pack(fill="both")
+            
+            sb3 = tk.Scrollbar(tab3)
+            sb23 = tk.Scrollbar(tab3, orient='horizontal')
+            
+            sb3.pack(side = tk.RIGHT, fill = tk.Y)
+            sb23.pack(side = tk.BOTTOM, fill = tk.X)
+            
+            mylist13 = tk.Listbox(tab3, height=1, width=154, font=("Monaco 11 bold"))  
+              
+            for line in range(1,2):  
+                mylist13.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",retirementTable[0][0],"|",retirementTable[0][1],"|",retirementTable[0][2],"|",retirementTable[0][3],"|",retirementTable[0][4],"|",retirementTable[0][5],"|",retirementTable[0][6],"|",retirementTable[0][7],"|",retirementTable[0][8],"|",retirementTable[0][9],"|"))  
+              
+            mylist13.pack( side = tk.TOP )  
+              
+            def xview(*args):
+                mylist13.xview(*args)
+                mylist3.xview(*args)
+            
+            mylist3 = tk.Listbox(tab3, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb3.set, xscrollcommand = sb23.set )  
+              
+            for line in retirementTable3[1:]:  
+                mylist3.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
+    
+              
+            mylist3.pack( side = tk.LEFT )  
+            sb3.config( command = mylist3.yview ) 
+            sb23.config( command = xview)
+            
+            tablayout.add(tab3,text=configurationName3)
+            #tablayout.pack(fill="both")
+            tablayout.place(relx=0.005, rely=0, relwidth=0.99)
+            
+            
+        except: 
+            print("there is an error in your inputs")
 
 app.mainloop()
