@@ -9,6 +9,8 @@ import tkinter as tk
 import tkinter.ttk as tkk
 import datetime
 import matplotlib.pyplot as plt
+import locale
+locale.setlocale( locale.LC_ALL, '' )
 
 
 class CreateToolTip(object):
@@ -39,11 +41,10 @@ class CreateToolTip(object):
             self.tw.destroy()
 
 
-
 numOfConfigurations = 1
 
 HEIGHT = 1080
-WIDTH = 1920
+WIDTH = 2160
 
 app = tk.Tk()
 app.title("IT680 - Retirement Calculator")
@@ -63,40 +64,13 @@ form = tk.Frame(canvas, bg="#263D42")
 form.place(relx=0, rely=0.105, relwidth=0.5, relheight=0.9)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 tableFrame = tk.Frame(canvas, bg="#262122")
 tableFrame.place(relx=0.5, rely=0.105, relwidth=0.5, relheight=0.9)
 
 
-
-
-
-
-
-
-
-
-
 formName = tk.Label(form, text="Retirement Form", font=("Helvetica 16 bold "), fg="yellow", bg="#263D42")  
 formName.place(relx=0.14, rely=0)
+
 
 #form labels frame
 formLabelsFrame = tk.Frame(form, bg="#263D42")
@@ -160,9 +134,6 @@ L_desiredEstate.place(relx=0.005, rely=0.41)
 
 L_confName = tk.Label(formLabelsFrame, text="Configuration Name: ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
 L_confName.place(relx=0.005, rely=0.44)
-
-
-
 
 
 
@@ -467,7 +438,7 @@ def clearAll():
     E_fName.insert('end', "Ayodele")
     E_lName.insert('end', "Olufemi")
     E_Email.insert('end', "ayodele.olufemi@mnsu.edu")
-    E_currentAge.insert('end', "45")
+    E_currentAge.insert('end', "25")
     E_retireAge.insert('end', "67")
     E_lifeExpectancy.insert('end', "100")
     E_currentAnnualSalary.insert('end', "50000")
@@ -478,6 +449,7 @@ def clearAll():
     E_averageAnnualReturnRate.insert('end', "4")
     E_averageAnnualSalaryIncrease.insert('end', "2")
     E_desiredEstate.insert('end', "100000")
+    E_confName.insert('end', 'SnowBall')
     
 def calculateRetirement():
     try:
@@ -516,7 +488,7 @@ def calculateRetirement():
         firstRow.append("Annual Sal")               #2
         firstRow.append("Annual Sav")               #3
         firstRow.append("Growth")                   #4
-        firstRow.append("Soc Sec")          #5
+        firstRow.append("Soc Sec")                  #5
         firstRow.append("RMD")                      #6
         firstRow.append("Desired Sal")              #7
         firstRow.append("Withdrawn")                #8
@@ -619,147 +591,47 @@ def calculateRetirement():
         
         
         
+        s = tkk.Style()
+        s.configure('TNotebook.Tab', font=('Helvetica', '11', 'bold'))
+        
         if numOfConfigurations == 1:
             tablayout = tkk.Notebook(tableFrame)
             tab1 = tk.Frame(tablayout)
             tab1.pack(fill="both")
             
+            sb = tk.Scrollbar(tab1)
+            sb2 = tk.Scrollbar(tab1, orient='horizontal')
             
-            
-            sb = tk.Scrollbar(tab1)  
             sb.pack(side = tk.RIGHT, fill = tk.Y)
-            mylist1 = tk.Listbox(tab1, height=1, width=154, font=("Helvetica 11 bold"))  
+            sb2.pack(side = tk.BOTTOM, fill = tk.X)
+            
+            mylist1 = tk.Listbox(tab1, height=1, width=154, font=("Monaco 11 bold"))  
               
             for line in range(1,2):  
-                mylist1.insert(tk.END, "{:1}{:^10}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}".format("|",retirementTable[0][0],"|",retirementTable[0][1],"|",retirementTable[0][2],"|",retirementTable[0][3],"|",retirementTable[0][4],"|",retirementTable[0][5],"|",retirementTable[0][6],"|",retirementTable[0][7],"|",retirementTable[0][8],"|",retirementTable[0][9],"|"))  
+                mylist1.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",retirementTable[0][0],"|",retirementTable[0][1],"|",retirementTable[0][2],"|",retirementTable[0][3],"|",retirementTable[0][4],"|",retirementTable[0][5],"|",retirementTable[0][6],"|",retirementTable[0][7],"|",retirementTable[0][8],"|",retirementTable[0][9],"|"))  
               
             mylist1.pack( side = tk.TOP )  
               
+            def xview(*args):
+                mylist1.xview(*args)
+                mylist.xview(*args)
             
-            
-            mylist = tk.Listbox(tab1, height=55, width=154, font=("Helvetica 11"), yscrollcommand = sb.set )  
+            mylist = tk.Listbox(tab1, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
               
             for line in retirementTable[1:]:  
-                mylist.insert(tk.END, "{:1}{:>10}{:1}{:>15}{:1}{:>15}{:1}{:<15}{:1}{:<15}{:1}{:<15}{:1}{:<15}{:1}{:<15}{:1}{:<15}{:1}{:<15}{:1}".format("|",line[0],"|",line[1],"|",line[2],"|",line[3],"|",line[4],"|",line[5],"|",line[6],"|",line[7],"|",line[8],"|",line[9],"|"))  
+                mylist.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
+
               
             mylist.pack( side = tk.LEFT )  
             sb.config( command = mylist.yview ) 
+            sb2.config( command = xview)
             
             tablayout.add(tab1,text=configurationName)
             #tablayout.pack(fill="both")
             tablayout.place(relx=0.005, rely=0, relwidth=0.99)
             
             
-        if numOfConfigurations == 2: 
-            tablayout = tkk.Notebook(tableFrame)
-            tab1 = tk.Frame(tablayout)
-            tab1.pack(fill="both")
-            
-            for row in range(5):
-                for column in range(6):
-                    if row==0:
-                        label = tk.Entry(tab1, text="Heading : " + str(column))
-                        label.config(font=('Arial',14))
-                        label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-                        tab1.grid_columnconfigure(column, weight=1)
-                    else:
-                        label=tk.Entry(tab1,text="Row : "+str(row)+" , Column : "+str(column))
-                        label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-                        tab1.grid_columnconfigure(column,weight=1)
-            
-            tablayout.add(tab1,text="TAB 1")
-            
-            
-            #tab2
-            tab2=tk.Frame(tablayout)
-            tab2.pack(fill="both")
-            
-            #adding table into tab
-            
-            for row in range(5):
-                for column in range(6):
-                    if row==0:
-                        label = tk.Label(tab2, text="Heading : " + str(column), bg="white", fg="black", padx=3,
-                                      pady=3)
-                        label.config(font=('Arial',14))
-                        label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-                        tab2.grid_columnconfigure(column, weight=1)
-                    else:
-                        label=tk.Label(tab2,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
-                        label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-                        tab2.grid_columnconfigure(column,weight=1)
-            
-            tablayout.add(tab2,text="TAB 2")
-            
-            #tablayout.pack(fill="both")
-            tablayout.place(relx=0.05, rely=0, relwidth=0.9)
-            
-        if numOfConfigurations == 3:
-            tablayout = tkk.Notebook(tableFrame)
-            tab1 = tk.Frame(tablayout)
-            tab1.pack(fill="both")
-            
-            for row in range(5):
-                for column in range(6):
-                    if row==0:
-                        label = tk.Entry(tab1, text="Heading : " + str(column))
-                        label.config(font=('Arial',14))
-                        label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-                        tab1.grid_columnconfigure(column, weight=1)
-                    else:
-                        label=tk.Entry(tab1,text="Row : "+str(row)+" , Column : "+str(column))
-                        label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-                        tab1.grid_columnconfigure(column,weight=1)
-            
-            tablayout.add(tab1,text="TAB 1")
-            
-            
-            #tab2
-            tab2=tk.Frame(tablayout)
-            tab2.pack(fill="both")
-            
-            #adding table into tab
-            
-            for row in range(5):
-                for column in range(6):
-                    if row==0:
-                        label = tk.Label(tab2, text="Heading : " + str(column), bg="white", fg="black", padx=3,
-                                      pady=3)
-                        label.config(font=('Arial',14))
-                        label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-                        tab2.grid_columnconfigure(column, weight=1)
-                    else:
-                        label=tk.Label(tab2,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
-                        label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-                        tab2.grid_columnconfigure(column,weight=1)
-            
-            tablayout.add(tab2,text="TAB 2")
-            
-            
-            #tab3
-            tab3=tk.Frame(tablayout)
-            tab3.pack(fill="both")
-            
-            #adding table into tab
-            
-            for row in range(5):
-                for column in range(6):
-                    if row==0:
-                        label = tk.Label(tab3, text="Heading : " + str(column), bg="white", fg="black", padx=3,
-                                      pady=3)
-                        label.config(font=('Arial',14))
-                        label.grid(row=row, column=column, sticky="nsew", padx=1, pady=1)
-                        tab3.grid_columnconfigure(column, weight=1)
-                    else:
-                        label=tk.Label(tab3,text="Row : "+str(row)+" , Column : "+str(column),bg="black",fg="white",padx=3,pady=3)
-                        label.grid(row=row,column=column,sticky="nsew",padx=1,pady=1)
-                        tab3.grid_columnconfigure(column,weight=1)
-            
-            tablayout.add(tab3,text="TAB 3")
-            
-            #tablayout.pack(fill="both")
-            tablayout.place(relx=0.05, rely=0, relwidth=0.9)
-        
+
         
         
 
