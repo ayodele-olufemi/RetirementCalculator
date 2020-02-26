@@ -11,6 +11,7 @@ import datetime
 import matplotlib.pyplot as plt
 import locale
 locale.setlocale( locale.LC_ALL, '' )
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 class CreateToolTip(object):
@@ -412,15 +413,26 @@ E_confName3_ttp = CreateToolTip(E_confName3, "Enter a name for this configuratio
 
 
 B_calculateButton = tk.Button(form, text="Calculate", command=lambda: calculateRetirement())
-B_calculateButton.place(relx=0.11, rely=0.55, relwidth=0.1)
+B_calculateButton.place(relx=0.1, rely=0.55, relwidth=0.2)
 
-B_resetButton = tk.Button(form, text="Reset", command=lambda: clearAll())
-B_resetButton.place(relx=0.26, rely=0.55, relwidth=0.1)
+#B_resetButton = tk.Button(form, text="Reset", command=lambda: clearAll())
+#B_resetButton.place(relx=0.26, rely=0.55, relwidth=0.1)
 
 
+B_prefillButton1 = tk.Button(form, text="Prefill 1", command=lambda: prefill1())
+B_prefillButton1.place(relx=0.32, rely=0.55, relwidth=0.1)
+
+B_prefillButton2 = tk.Button(form, text="Prefill 2", command=lambda: prefill2())
+B_prefillButton2.place(relx=0.55, rely=0.55, relwidth=0.1)
+
+B_prefillButton3 = tk.Button(form, text="Prefill 3", command=lambda: prefill3())
+B_prefillButton3.place(relx=0.78, rely=0.55, relwidth=0.1)
+
+F_plotFrame = tk.Frame(form, bg="#263D42")
+F_plotFrame.place(relx=0, rely=0.58, relwidth=1, relheight=0.41)
 
 #defining the reset button
-def clearAll2():
+def clearAll():
     E_fName.delete(0, 'end')
     E_lName.delete(0, 'end')
     E_Email.delete(0, 'end')
@@ -433,8 +445,9 @@ def clearAll2():
     E_desAnnualRetIncomeA.delete(0, 'end')
     E_desAnnualRetIncomeI.delete(0, 'end')
     L_averageAnnualReturnRate.delete(0, 'end')
+    
 
-def clearAll():
+def prefill1():
     E_fName.insert('end', "Ayodele")
     E_lName.insert('end', "Olufemi")
     E_Email.insert('end', "ayodele.olufemi@mnsu.edu")
@@ -450,6 +463,34 @@ def clearAll():
     E_averageAnnualSalaryIncrease.insert('end', "2")
     E_desiredEstate.insert('end', "100000")
     E_confName.insert('end', 'SnowBall')
+
+def prefill2():
+    E_currentAge2.insert('end', "30")
+    E_retireAge2.insert('end', "55")
+    E_lifeExpectancy2.insert('end', "100")
+    E_currentAnnualSalary2.insert('end', "75000")
+    S_annualRetCont2.set(10)
+    E_currentRetSavings2.insert('end', "120000")
+    E_desAnnualRetIncomeA2.insert('end', "55000")
+    E_desAnnualRetIncomeI2.insert('end', "20000")
+    E_averageAnnualReturnRate2.insert('end', "5")
+    E_averageAnnualSalaryIncrease2.insert('end', "2")
+    E_desiredEstate2.insert('end', "100000")
+    E_confName2.insert('end', 'JellyBeans')
+
+def prefill3():
+    E_currentAge3.insert('end', "35")
+    E_retireAge3.insert('end', "69")
+    E_lifeExpectancy3.insert('end', "100")
+    E_currentAnnualSalary3.insert('end', "84000")
+    S_annualRetCont3.set(13)
+    E_currentRetSavings3.insert('end', "200000")
+    E_desAnnualRetIncomeA3.insert('end', "60000")
+    E_desAnnualRetIncomeI3.insert('end', "20000")
+    E_averageAnnualReturnRate3.insert('end', "3")
+    E_averageAnnualSalaryIncrease3.insert('end', "3")
+    E_desiredEstate3.insert('end', "100000")
+    E_confName3.insert('end', 'GingerBread')
     
 def calculateRetirement():
     if numOfConfigurations == 1:
@@ -588,7 +629,22 @@ def calculateRetirement():
             nestEgg = []
             for k in retirementTable:
                 nestEgg.append(k[9])
-            plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
+            #plt.plot(range(currentAge, finalAge + 1), nestEgg[1:], label=configurationName)
+            #plt.xlabel('Age (years)')
+            #plt.ylabel('Nest Egg ($)')
+            #plt.title('Nest Egg changes with age')
+            #plt.legend(loc='upper left')
+            
+            figure = plt.Figure(figsize=(6,5), dpi=100)
+            
+            ax1 = figure.add_subplot(111)
+            plot1 = FigureCanvasTkAgg(figure, F_plotFrame)
+            plot1.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH)
+            ax1.plot(range(currentAge, finalAge + 1), nestEgg[1:], label=configurationName)
+            ax1.set_xlabel('Age (years)')
+            ax1.set_ylabel('Nest Egg ($)')
+            ax1.set_title('Nest Egg changes with age')
+            ax1.legend(loc='upper left')
             
             
             
@@ -769,7 +825,17 @@ def calculateRetirement():
             nestEgg = []
             for k in retirementTable:
                 nestEgg.append(k[9])
-            plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
+            
+            figure = plt.Figure(figsize=(6,5), dpi=100)
+            
+            ax1 = figure.add_subplot(111)
+            plot1 = FigureCanvasTkAgg(figure, F_plotFrame)
+            plot1.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH)
+            ax1.plot(range(currentAge, finalAge + 1), nestEgg[1:], label=configurationName)
+            ax1.set_xlabel('Age (years)')
+            ax1.set_ylabel('Nest Egg ($)')
+            ax1.set_title('Nest Egg changes with age')
+            
             
             
             
@@ -942,7 +1008,8 @@ def calculateRetirement():
             nestEgg2 = []
             for k in retirementTable2:
                 nestEgg2.append(k[9])
-            plt.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:])
+            ax1.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:], label=configurationName2)
+            ax1.legend(loc='upper left')
             
             
             
@@ -1124,7 +1191,16 @@ def calculateRetirement():
             nestEgg = []
             for k in retirementTable:
                 nestEgg.append(k[9])
-            plt.plot(range(currentAge, finalAge + 1), nestEgg[1:])
+            figure = plt.Figure(figsize=(6,5), dpi=100)
+            
+            ax1 = figure.add_subplot(111)
+            plot1 = FigureCanvasTkAgg(figure, F_plotFrame)
+            plot1.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH)
+            ax1.plot(range(currentAge, finalAge + 1), nestEgg[1:], label=configurationName)
+            ax1.set_xlabel('Age (years)')
+            ax1.set_ylabel('Nest Egg ($)')
+            ax1.set_title('Nest Egg changes with age')
+            
             
             
             
@@ -1297,7 +1373,7 @@ def calculateRetirement():
             nestEgg2 = []
             for k in retirementTable2:
                 nestEgg2.append(k[9])
-            plt.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:])
+            ax1.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:], label=configurationName2)
             
             
             
@@ -1467,7 +1543,8 @@ def calculateRetirement():
             nestEgg3 = []
             for k in retirementTable3:
                 nestEgg3.append(k[9])
-            plt.plot(range(currentAge3, finalAge3 + 1), nestEgg3[1:])
+            ax1.plot(range(currentAge3, finalAge3 + 1), nestEgg3[1:], label=configurationName3)
+            ax1.legend(loc='upper left')
             
             
             
