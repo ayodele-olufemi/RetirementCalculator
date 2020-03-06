@@ -44,7 +44,7 @@ class CreateToolTip(object):
 
 numOfConfigurations = 1
 
-HEIGHT = 1080
+HEIGHT = 1200
 WIDTH = 2160
 
 app = tk.Tk()
@@ -54,7 +54,7 @@ canvas.pack()
 
 
 nav = tk.Frame(canvas, bg="#000000")
-nav.place(relwidth=1, relheight=0.1)
+nav.place(relwidth=1, relheight=0.07)
 
 
 appName = tk.Label(nav, text="Retirement Calculator", font=("Helvetica 26 bold italic"), fg="#ff9933", bg="#000000")  
@@ -62,11 +62,11 @@ appName.pack(expand=True)
 
 
 form = tk.Frame(canvas, bg="#263D42")
-form.place(relx=0, rely=0.105, relwidth=0.5, relheight=0.9)
+form.place(relx=0, rely=0.07, relwidth=0.5, relheight=0.93)
 
 
 tableFrame = tk.Frame(canvas, bg="#262122")
-tableFrame.place(relx=0.5, rely=0.105, relwidth=0.5, relheight=0.9)
+tableFrame.place(relx=0.5, rely=0.07, relwidth=0.5, relheight=0.93)
 
 
 formName = tk.Label(form, text="Retirement Form", font=("Helvetica 16 bold "), fg="yellow", bg="#263D42")  
@@ -135,6 +135,9 @@ L_desiredEstate.place(relx=0.005, rely=0.41)
 
 L_confName = tk.Label(formLabelsFrame, text="Configuration Name: ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
 L_confName.place(relx=0.005, rely=0.44)
+
+L_addSS = tk.Label(formLabelsFrame, text="Include Social Security: ", fg="white", font=("Helvetica 10 bold"), bg="#263D42")
+L_addSS.place(relx=0.005, rely=0.47)
 
 
 
@@ -218,8 +221,14 @@ E_confName.place(relx=0, rely=0.44, relwidth=1)
 E_confName_ttp = CreateToolTip(E_confName, "Enter a name for this configuration")
 
 
+E_addSS = tkk.Combobox(formEntryFrame, values=["No", "Yes"])
+E_addSS.place(relx=0, rely=0.47, relwidth=1)
+E_addSS.current(0)
+E_addSS_ttp = CreateToolTip(E_addSS, "Opt to add SS or not")
+
+
 E_comparison = tk.Button(formEntryFrame, text="Add Another Configuration?", command=lambda: compareControl())
-E_comparison.place(relx=0, rely=0.47, relwidth=1)
+E_comparison.place(relx=0, rely=0.50, relwidth=1)
 
 
 def compareControl():
@@ -245,7 +254,8 @@ def compareControl():
     E_averageAnnualSalaryIncrease2.place(relx=0, rely=0.38, relwidth=1)
     E_desiredEstate2.place(relx=0, rely=0.41, relwidth=1)
     E_confName2.place(relx=0, rely=0.44, relwidth=1)
-    E_comparison2.place(relx=0, rely=0.47, relwidth=1)
+    E_addSS2.place(relx=0, rely=0.47, relwidth=1)
+    E_comparison2.place(relx=0, rely=0.50, relwidth=1)
     E_comparison.place_forget()
 
 
@@ -314,6 +324,10 @@ E_desiredEstate2_ttp = CreateToolTip(E_desiredEstate2, "If desired, enter estima
 E_confName2 = tk.Entry(formEntryFrame2, bg="white")
 E_confName2_ttp = CreateToolTip(E_confName2, "Enter a name for this configuration")
 
+E_addSS2 = tkk.Combobox(formEntryFrame2, values=["No", "Yes"])
+E_addSS2.current(0)
+E_addSS2_ttp = CreateToolTip(E_addSS2, "Opt to add SS or not")
+
 E_comparison2 = tk.Button(formEntryFrame2, text="Add Another Configuration?", command=lambda: compareControl2())
 
 
@@ -340,6 +354,7 @@ def compareControl2():
     E_averageAnnualSalaryIncrease3.place(relx=0, rely=0.38, relwidth=1)
     E_desiredEstate3.place(relx=0, rely=0.41, relwidth=1)
     E_confName3.place(relx=0, rely=0.44, relwidth=1)
+    E_addSS3.place(relx=0, rely=0.47, relwidth=1)
     E_comparison2.place_forget()
 
 
@@ -410,23 +425,27 @@ E_desiredEstate3_ttp = CreateToolTip(E_desiredEstate3, "If desired, enter estima
 E_confName3 = tk.Entry(formEntryFrame3, bg="white")
 E_confName3_ttp = CreateToolTip(E_confName3, "Enter a name for this configuration")
 
+E_addSS3 = tkk.Combobox(formEntryFrame3, values=["No", "Yes"])
+E_addSS3.current(0)
+E_addSS3_ttp = CreateToolTip(E_addSS3, "Opt to add SS or not")
 
 
-B_calculateButton = tk.Button(form, text="Calculate", command=lambda: calculateRetirement())
-B_calculateButton.place(relx=0.1, rely=0.55, relwidth=0.2)
+
+B_calculateButton = tk.Button(form, bg='green', text="Calculate", command=lambda: calculateRetirement())
+B_calculateButton.place(relx=0.01, rely=0.53, relwidth=0.2)
 
 #B_resetButton = tk.Button(form, text="Reset", command=lambda: clearAll())
 #B_resetButton.place(relx=0.26, rely=0.55, relwidth=0.1)
 
 
 B_prefillButton1 = tk.Button(form, text="Prefill 1", command=lambda: prefill1())
-B_prefillButton1.place(relx=0.32, rely=0.55, relwidth=0.1)
+B_prefillButton1.place(relx=0.32, rely=0.56, relwidth=0.1)
 
 B_prefillButton2 = tk.Button(form, text="Prefill 2", command=lambda: prefill2())
-B_prefillButton2.place(relx=0.55, rely=0.55, relwidth=0.1)
+B_prefillButton2.place(relx=0.55, rely=0.56, relwidth=0.1)
 
 B_prefillButton3 = tk.Button(form, text="Prefill 3", command=lambda: prefill3())
-B_prefillButton3.place(relx=0.78, rely=0.55, relwidth=0.1)
+B_prefillButton3.place(relx=0.78, rely=0.56, relwidth=0.1)
 
 F_plotFrame = tk.Frame(form, bg="#263D42")
 F_plotFrame.place(relx=0, rely=0.58, relwidth=1, relheight=0.41)
@@ -496,7 +515,8 @@ def calculateRetirement():
     if numOfConfigurations == 1:
         try:
             rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
-            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10.2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+            
             ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
             ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
             
@@ -515,11 +535,12 @@ def calculateRetirement():
             avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
             desiredEstate = float(E_desiredEstate.get())
             configurationName = E_confName.get()
+            ssAdded = E_addSS.get()
             currentYear = datetime.datetime.now().year
             retirementTable = []
             tableRows = range(currentAge + 1, 101)
             
-            if retireAge < 62:
+            if retireAge < 62 or ssAdded == "No":
                 ssnAmount = 0
             else:
                 ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
@@ -629,6 +650,10 @@ def calculateRetirement():
             nestEgg = []
             for k in retirementTable:
                 nestEgg.append(k[9])
+            
+            withdrawnAmount = []
+            for k in retirementTable:
+                withdrawnAmount.append(k[8])
             #plt.plot(range(currentAge, finalAge + 1), nestEgg[1:], label=configurationName)
             #plt.xlabel('Age (years)')
             #plt.ylabel('Nest Egg ($)')
@@ -645,6 +670,13 @@ def calculateRetirement():
             ax1.set_ylabel('Nest Egg ($)')
             ax1.set_title('Nest Egg changes with age')
             ax1.legend(loc='upper left')
+            
+            g = range(currentAge, finalAge + 1)
+            p = g.index(retireAge)
+            
+            ax2 = ax1.twinx()
+            ax2.plot(range(retireAge, finalAge + 1), withdrawnAmount[p+1:], dashes=[6, 2], label=configurationName + " Depletion")
+            ax2.set_ylabel("Retirement Depletion")
             
             
             
@@ -671,7 +703,7 @@ def calculateRetirement():
                 mylist1.xview(*args)
                 mylist.xview(*args)
             
-            mylist = tk.Listbox(tab1, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
+            mylist = tk.Listbox(tab1, height=58, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
               
             for line in retirementTable[1:]:  
                 mylist.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
@@ -692,7 +724,7 @@ def calculateRetirement():
     if numOfConfigurations == 2:
         try:
             rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
-            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10.2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
             ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
             ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
             
@@ -711,11 +743,12 @@ def calculateRetirement():
             avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
             desiredEstate = float(E_desiredEstate.get())
             configurationName = E_confName.get()
+            ssAdded = E_addSS.get()
             currentYear = datetime.datetime.now().year
             retirementTable = []
             tableRows = range(currentAge + 1, 101)
             
-            if retireAge < 62:
+            if retireAge < 62 or ssAdded == "No":
                 ssnAmount = 0
             else:
                 ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
@@ -826,6 +859,10 @@ def calculateRetirement():
             for k in retirementTable:
                 nestEgg.append(k[9])
             
+            withdrawnAmount = []
+            for k in retirementTable:
+                withdrawnAmount.append(k[8])
+                
             figure = plt.Figure(figsize=(6,5), dpi=100)
             
             ax1 = figure.add_subplot(111)
@@ -836,7 +873,12 @@ def calculateRetirement():
             ax1.set_ylabel('Nest Egg ($)')
             ax1.set_title('Nest Egg changes with age')
             
+            g = range(currentAge, finalAge + 1)
+            p = g.index(retireAge)
             
+            ax2 = ax1.twinx()
+            ax2.plot(range(retireAge, finalAge + 1), withdrawnAmount[p+1:], dashes=[6, 2], label=configurationName + " Depletion")
+            ax2.set_ylabel("Retirement Depletion")
             
             
             s = tkk.Style()
@@ -862,7 +904,7 @@ def calculateRetirement():
                 mylist1.xview(*args)
                 mylist.xview(*args)
             
-            mylist = tk.Listbox(tab1, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
+            mylist = tk.Listbox(tab1, height=58, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
               
             for line in retirementTable[1:]:  
                 mylist.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
@@ -894,11 +936,12 @@ def calculateRetirement():
             avgAnnualSalaryIncrease2 = float(E_averageAnnualSalaryIncrease2.get())
             desiredEstate2 = float(E_desiredEstate2.get())
             configurationName2 = E_confName2.get()
+            ssAdded2 = E_addSS2.get()
             currentYear2 = datetime.datetime.now().year
             retirementTable2 = []
             tableRows2 = range(currentAge2 + 1, 101)
             
-            if retireAge2 < 62:
+            if retireAge2 < 62 or ssAdded2 == "No":
                 ssnAmount = 0
             else:
                 ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge2)])
@@ -1008,9 +1051,19 @@ def calculateRetirement():
             nestEgg2 = []
             for k in retirementTable2:
                 nestEgg2.append(k[9])
+            
+            withdrawnAmount2 = []
+            for k in retirementTable2:
+                withdrawnAmount2.append(k[8])
+                
             ax1.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:], label=configurationName2)
             ax1.legend(loc='upper left')
             
+            g2 = range(currentAge2, finalAge2 + 1)
+            p2 = g2.index(retireAge2)
+            
+            
+            ax2.plot(range(retireAge2, finalAge2 + 1), withdrawnAmount2[p2+1:], dashes=[6, 2], label=configurationName2 + " Depletion")
             
             
             
@@ -1035,7 +1088,7 @@ def calculateRetirement():
                 mylist12.xview(*args)
                 mylist2.xview(*args)
             
-            mylist2 = tk.Listbox(tab2, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb2.set, xscrollcommand = sb22.set )  
+            mylist2 = tk.Listbox(tab2, height=58, width=154, font=("Monaco 11 bold"), yscrollcommand = sb2.set, xscrollcommand = sb22.set )  
               
             for line in retirementTable2[1:]:  
                 mylist2.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
@@ -1058,7 +1111,7 @@ def calculateRetirement():
     if numOfConfigurations == 3:
         try:
             rMDAge = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115]
-            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10, 2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
+            rMD70 = [27.4, 26.5, 25.6, 24.7, 23.8, 22.9, 22, 21.2, 20.3, 19.5, 18.7, 17.9, 17.1, 16.3, 15.5, 14.8, 14.1, 13.4, 12.7, 12, 11.4, 10.8, 10.2, 9.6, 9.1, 8.6, 8.1, 7.6, 7.1, 6.7, 6.3, 5.9, 5.5, 5.2, 4.9, 4.5, 4.2, 3.9, 3.7, 3.4, 3.1, 2.9, 2.4, 2.1, 1.9]
             ssnBenStartAge = [62,63,64,65,66,67,68,69,70,71,72,73,74,75]
             ssnBenefit62 = [16000,16500,17000,17500,18000,18500,19000,19500,20000,20500,21000,21500,22000,22500]
             
@@ -1077,11 +1130,12 @@ def calculateRetirement():
             avgAnnualSalaryIncrease = float(E_averageAnnualSalaryIncrease.get())
             desiredEstate = float(E_desiredEstate.get())
             configurationName = E_confName.get()
+            ssAdded = E_addSS.get()
             currentYear = datetime.datetime.now().year
             retirementTable = []
             tableRows = range(currentAge + 1, 101)
             
-            if retireAge < 62:
+            if retireAge < 62 or ssAdded == "No":
                 ssnAmount = 0
             else:
                 ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge)])
@@ -1191,6 +1245,11 @@ def calculateRetirement():
             nestEgg = []
             for k in retirementTable:
                 nestEgg.append(k[9])
+            withdrawnAmount = []
+            
+            for k in retirementTable:
+                withdrawnAmount.append(k[8])
+            
             figure = plt.Figure(figsize=(6,5), dpi=100)
             
             ax1 = figure.add_subplot(111)
@@ -1201,7 +1260,12 @@ def calculateRetirement():
             ax1.set_ylabel('Nest Egg ($)')
             ax1.set_title('Nest Egg changes with age')
             
+            g = range(currentAge, finalAge + 1)
+            p = g.index(retireAge)
             
+            ax2 = ax1.twinx()
+            ax2.plot(range(retireAge, finalAge + 1), withdrawnAmount[p+1:], dashes=[6, 2], label=configurationName + " Depletion")
+            ax2.set_ylabel("Retirement Depletion")
             
             
             s = tkk.Style()
@@ -1227,7 +1291,7 @@ def calculateRetirement():
                 mylist1.xview(*args)
                 mylist.xview(*args)
             
-            mylist = tk.Listbox(tab1, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
+            mylist = tk.Listbox(tab1, height=58, width=154, font=("Monaco 11 bold"), yscrollcommand = sb.set, xscrollcommand = sb2.set )  
               
             for line in retirementTable[1:]:  
                 mylist.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
@@ -1259,11 +1323,12 @@ def calculateRetirement():
             avgAnnualSalaryIncrease2 = float(E_averageAnnualSalaryIncrease2.get())
             desiredEstate2 = float(E_desiredEstate2.get())
             configurationName2 = E_confName2.get()
+            ssAdded2 = E_addSS2.get()
             currentYear2 = datetime.datetime.now().year
             retirementTable2 = []
             tableRows2 = range(currentAge2 + 1, 101)
             
-            if retireAge2 < 62:
+            if retireAge2 < 62 or ssAdded2 == "No":
                 ssnAmount = 0
             else:
                 ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge2)])
@@ -1373,10 +1438,18 @@ def calculateRetirement():
             nestEgg2 = []
             for k in retirementTable2:
                 nestEgg2.append(k[9])
+            withdrawnAmount2 = []
+            for k in retirementTable2:
+                withdrawnAmount2.append(k[8])
+                
             ax1.plot(range(currentAge2, finalAge2 + 1), nestEgg2[1:], label=configurationName2)
             
             
+            g2 = range(currentAge2, finalAge2 + 1)
+            p2 = g2.index(retireAge2)
             
+            
+            ax2.plot(range(retireAge2, finalAge2 + 1), withdrawnAmount2[p2+1:], dashes=[6, 2], label=configurationName2 + " Depletion")
             
             
             tab2 = tk.Frame(tablayout)
@@ -1399,7 +1472,7 @@ def calculateRetirement():
                 mylist12.xview(*args)
                 mylist2.xview(*args)
             
-            mylist2 = tk.Listbox(tab2, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb2.set, xscrollcommand = sb22.set )  
+            mylist2 = tk.Listbox(tab2, height=58, width=154, font=("Monaco 11 bold"), yscrollcommand = sb2.set, xscrollcommand = sb22.set )  
               
             for line in retirementTable2[1:]:  
                 mylist2.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
@@ -1429,11 +1502,12 @@ def calculateRetirement():
             avgAnnualSalaryIncrease3 = float(E_averageAnnualSalaryIncrease3.get())
             desiredEstate3 = float(E_desiredEstate3.get())
             configurationName3 = E_confName3.get()
+            ssAdded3 = E_addSS3.get()
             currentYear3 = datetime.datetime.now().year
             retirementTable3 = []
             tableRows3 = range(currentAge3 + 1, 101)
             
-            if retireAge3 < 62:
+            if retireAge3 < 62 or ssAdded3 == "No":
                 ssnAmount = 0
             else:
                 ssnAmount = round(ssnBenefit62[ssnBenStartAge.index(retireAge3)])
@@ -1543,11 +1617,20 @@ def calculateRetirement():
             nestEgg3 = []
             for k in retirementTable3:
                 nestEgg3.append(k[9])
+            
+            withdrawnAmount3 = []
+            for k in retirementTable3:
+                withdrawnAmount3.append(k[8])
+            
             ax1.plot(range(currentAge3, finalAge3 + 1), nestEgg3[1:], label=configurationName3)
             ax1.legend(loc='upper left')
             
             
+            g3 = range(currentAge3, finalAge3 + 1)
+            p3 = g3.index(retireAge3)
             
+            
+            ax2.plot(range(retireAge3, finalAge3 + 1), withdrawnAmount3[p3+1:], dashes=[6, 2], label=configurationName3 + " Depletion")
             
             
             tab3 = tk.Frame(tablayout)
@@ -1570,7 +1653,7 @@ def calculateRetirement():
                 mylist13.xview(*args)
                 mylist3.xview(*args)
             
-            mylist3 = tk.Listbox(tab3, height=50, width=154, font=("Monaco 11 bold"), yscrollcommand = sb3.set, xscrollcommand = sb23.set )  
+            mylist3 = tk.Listbox(tab3, height=58, width=154, font=("Monaco 11 bold"), yscrollcommand = sb3.set, xscrollcommand = sb23.set )  
               
             for line in retirementTable3[1:]:  
                 mylist3.insert(tk.END, "{:1}{:^6}{:1}{:^6}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^15}{:1}{:^20}{:1}".format("|",line[0],"|",line[1],"|",locale.currency(line[2], grouping=True),"|",locale.currency(line[3], grouping=True),"|",locale.currency(line[4], grouping=True),"|",locale.currency(line[5], grouping=True),"|",locale.currency(line[6], grouping=True),"|",locale.currency(line[7], grouping=True),"|",locale.currency(line[8], grouping=True),"|",locale.currency(line[9], grouping=True),"|"))  
